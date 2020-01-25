@@ -20,6 +20,8 @@ class PaymentController extends Controller
 
     public function index(Request $request)
     {   
+        session(['Event' => 'Successful Event Noted']);
+
         $user = Auth::user();
 
         $stripe_id = $user->stripe_id;
@@ -34,13 +36,13 @@ class PaymentController extends Controller
       \Stripe\Stripe::setApiKey("sk_test_mjbX2sjmeB1lxyk2p51BvLm0007zjhZL7i");
 
         $charges = \Stripe\Charge::all(['limit' => 10, 'customer' => $stripe_id]);
+        $refunds = \Stripe\Refund::all(['limit' => 10]);
         $customer = \Stripe\Customer::retrieve($stripe_id);
 
         $invoices = $user->invoices();
     
        // dd($invoices);    
         
-        $refunds = \Stripe\Refund::all(["limit" => 10]);
 
         $user->updateDefaultPaymentMethodFromStripe();
 

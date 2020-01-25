@@ -3,30 +3,12 @@
 @section('content1')
 <div class='w3-card w3-content w3-padding-large'>
 
-
-
 @if (session('Event'))
-          <div class="w3-round w3-center  w3-card w3-light-green">
-              {{ session('Event') }}
-          </div>
+  @component('components.alert')
+  Hello {{ session('Event') }}
+  @endcomponent
+@endif
 
-          <div  id="snackbar">{{ session('Event') }} Some text some message..</div>
-     
-     <script>
-     function myFunction() {
-  // Get the snackbar DIV
-  var x = document.getElementById("snackbar");
-
-  // Add the "show" class to DIV
-  x.className = "show";
-
-  // After 3 seconds, remove the show class from DIV
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-} 
-myFunction();
-     </script>
-     
-      @endif
 
       @if (session('status'))
           <div class="w3-round w3-center  w3-card w3-light-green">
