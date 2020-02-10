@@ -13,6 +13,7 @@
         "laravel/cashier": "^10.5",
         "laravel/framework": "^6.2",
         "laravel/tinker": "^2.0",
+        "pusher/pusher-php-server": "^4.1",
         "tcg/voyager": "^1.3"
     },
     "require-dev": {
