@@ -9,12 +9,12 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\User;  
+use App\User;
 
 class UserRegistered
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    
+
     public $user;
     /**
      * Create a new event instance.
@@ -24,7 +24,8 @@ class UserRegistered
     public function __construct(User $user)
     {
         //
-        $this->user = $user; 
+        $this->user = $user;
+        $this->user = $user;
     }
 
     /**

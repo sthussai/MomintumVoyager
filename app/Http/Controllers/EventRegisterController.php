@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\EventRegister;  
+use App\EventRegister;
 use App\Event;
+use App\Events\EventRegistrationCreated;
+use App\Events\EventRegistrationDeleted;
 
 class EventRegisterController extends Controller
 {
@@ -22,25 +25,25 @@ class EventRegisterController extends Controller
     {
         //
         $eventregisters = EventRegister::where('owner_id', auth()->id())->get();
-      //dd($eventregisters);
-        foreach ($eventregisters as $eventregister){
-        if($eventregister->status == 'New Registration Created'){
-            $eventregister->status= "<span class='w3-small w3-pale-red w3-round-large w3-padding'>".$eventregister->status."</span>";
-         } elseif($eventregister->status == 'Cancelled'){
-            $eventregister->status="<span id='register' class='w3-small w3-grey w3-round-large w3-padding'>".$eventregister->status."</span>";
-         } elseif($eventregister->status == 'Confirmed: will pay in person'){
-             $eventregister->status="<span id='register' class='w3-small w3-blue w3-round-large w3-padding'>".$eventregister->status."</span>";
-          } elseif($eventregister->status == 'Paid Online'){
-                $eventregister->status="<span id='register' class='w3-green w3-round-large w3-padding'>".$eventregister->status."</span>";
+        //dd($eventregisters);
+        foreach ($eventregisters as $eventregister) {
+            if ($eventregister->status == 'New Registration Created') {
+                $eventregister->status = "<span class='w3-small w3-pale-red w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+            } elseif ($eventregister->status == 'Cancelled') {
+                $eventregister->status = "<span id='register' class='w3-small w3-grey w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+            } elseif ($eventregister->status == 'Confirmed: will pay in person') {
+                $eventregister->status = "<span id='register' class='w3-small w3-blue w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+            } elseif ($eventregister->status == 'Paid Online') {
+                $eventregister->status = "<span id='register' class='w3-green w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+            } else {
+                $eventregister->status = "<span class='w3-small w3-margin-bottom w3-light-green w3-round-large w3-padding'>" . $eventregister->status . "</span>";
             }
-         else{
-            $eventregister->status="<span class='w3-small w3-margin-bottom w3-light-green w3-round-large w3-padding'>".$eventregister->status."</span>";
-         }
         }
 
 
-            
-        return view('eventregister.index',['eventregisters'=>$eventregisters]);
+
+
+        return view('eventregister.index', ['eventregisters' => $eventregisters]);
     }
 
     /**
@@ -49,10 +52,10 @@ class EventRegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create($eventid)
-    {   
+    {
         //return($event);
         $event = Event::find($eventid);
-        return view('eventregister.create', ['event'=>$event]);
+        return view('eventregister.create', ['event' => $event]);
         //
     }
 
@@ -71,16 +74,16 @@ class EventRegisterController extends Controller
         $eventregister->email = request()->email;
         $eventregister->phone = request()->phone;
         $eventregister->status = 'New Registration Created';
-        $eventregister->owner_id= Auth::user()->id;
-        $eventregister->event_id= request()->event_id;
+        $eventregister->owner_id = Auth::user()->id;
+        $eventregister->event_id = request()->event_id;
         $eventregister->event_name  = request()->event_name;
 
 
         $eventregister->save();
-        
-        return redirect('/eventregister'); 
-        
 
+        event(new EventRegistrationCreated($eventregister));
+
+        return redirect('/eventregister');
     }
 
     /**
@@ -91,42 +94,44 @@ class EventRegisterController extends Controller
      */
     public function show(EventRegister $eventregister)
     {
-        
+
         //$this->authorize('view', $eventregister);
-        auth()->user()->cannot('view', $eventregister); 
+        auth()->user()->cannot('view', $eventregister);
         //abort_if(\Gate::denies('view', $eventregister ), 403);
         //$eventregister = EventRegister::find($id);
-         $event = Event::find($eventregister->event_id);
-         $online=null;
-         $showform=null;
-         $showDeleteForm=true;
+        $event = Event::find($eventregister->event_id);
+        $online = null;
+        $showform = null;
+        $showDeleteForm = true;
 
-         if($eventregister->status == 'New Registration Created'){
-            $showform=true;
-            $eventregister->status= "<span class='w3-pale-red w3-round-large w3-padding'>".$eventregister->status."</span>";
-         } elseif($eventregister->status == 'Cancelled'){
-            $showform=true;
-            $eventregister->status="<span id='register' class='w3-grey w3-round-large w3-padding'>".$eventregister->status."</span>";
-         } elseif($eventregister->status == 'Confirmed: will pay in person'){
-            $showform=true;
-             $eventregister->status="<span id='register' class='w3-blue w3-round-large w3-padding'>".$eventregister->status."</span>";
-        } elseif($eventregister->status == 'Paid Online'){
-        $showform=false;
-        $online=false;
-        $showDeleteForm=false;
-            $eventregister->status="<span id='register' class='w3-green w3-round-large w3-padding'>".$eventregister->status."</span>";
-        } 
-         else {
-            $showform=true;
-            $online=true;
-             $eventregister->status="<span id='register' class='w3-light-green w3-round-large w3-padding'>".$eventregister->status."</span>";}
+        if ($eventregister->status == 'New Registration Created') {
+            $showform = true;
+            $eventregister->status = "<span class='w3-pale-red w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        } elseif ($eventregister->status == 'Cancelled') {
+            $showform = true;
+            $eventregister->status = "<span id='register' class='w3-grey w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        } elseif ($eventregister->status == 'Confirmed: will pay in person') {
+            $showform = true;
+            $eventregister->status = "<span id='register' class='w3-blue w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        } elseif ($eventregister->status == 'Paid Online') {
+            $showform = false;
+            $online = false;
+            $showDeleteForm = false;
+            $eventregister->status = "<span id='register' class='w3-green w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        } else {
+            $showform = true;
+            $online = true;
+            $eventregister->status = "<span id='register' class='w3-light-green w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        }
 
 
-        return view('eventregister.show', ['eventregister'=>$eventregister,
-        'event'=>$event,
-        'online'=>$online,
-        'showform'=>$showform,
-        'showDeleteForm'=>$showDeleteForm]);
+        return view('eventregister.show', [
+            'eventregister' => $eventregister,
+            'event' => $event,
+            'online' => $online,
+            'showform' => $showform,
+            'showDeleteForm' => $showDeleteForm
+        ]);
     }
 
     /**
@@ -137,10 +142,9 @@ class EventRegisterController extends Controller
      */
     public function edit($id)
     {
-      //
+        //
         $eventregister = EventRegister::find($id);
-        return view('eventregister.edit',['eventregister'=>$eventregister]);
-
+        return view('eventregister.edit', ['eventregister' => $eventregister]);
     }
 
     /**
@@ -158,9 +162,9 @@ class EventRegisterController extends Controller
         $eventregister->email = request()->email;
         $eventregister->phone = request()->phone;
         $eventregister->status = 'Registration Changed/Updated';
-        $eventregister->owner_id= auth()->id();
-        $eventregister->event_id= event()->id();
-        
+        $eventregister->owner_id = auth()->id();
+        $eventregister->event_id = event()->id();
+
         $eventregister->save();
 
         return redirect('/eventregister');
@@ -174,53 +178,53 @@ class EventRegisterController extends Controller
      */
     public function destroy($id)
     {
-        //
-        $eventregister = EventRegister::find($id)->delete();
+        $eventregister = EventRegister::findOrFail($id);
+
+        event(new EventRegistrationDeleted($eventregister));
+
+        $eventregister->delete();
 
         return redirect('/mprofile');
-
     }
 
-//This method updates the event registration status
+    //This method updates the event registration status
     public function confirm(Request $request, EventRegister $eventregister)
     {  // dd($request->status);
-       $eventregister->status = $request->status;
-       $eventregister->save();
+        $eventregister->status = $request->status;
+        $eventregister->save();
 
-$event = Event::find($eventregister->event_id);
+        $event = Event::find($eventregister->event_id);
 
-$online=null;
-$showform=null;
-$showDeleteForm=true;
-if($eventregister->status == 'New Registration Created'){
-   $showform=true;
-   $eventregister->status= "<span class='w3-pale-red w3-round-large w3-padding'>".$eventregister->status."</span>";
-} elseif($eventregister->status == 'Cancelled'){
-   $showform=true;
-   $eventregister->status="<span id='register' class='w3-grey w3-round-large w3-padding'>".$eventregister->status."</span>";
-} elseif($eventregister->status == 'Confirmed: will pay in person'){
-   $showform=true;
-    $eventregister->status="<span id='register' class='w3-blue w3-round-large w3-padding'>".$eventregister->status."</span>";
-} elseif($eventregister->status == 'Paid Online'){
-$showform=false;
-$online=false;
-$showDeleteForm=false;
-   $eventregister->status="<span id='register' class='w3-green w3-round-large w3-padding'>".$eventregister->status."</span>";
-} 
-else {
-   $showform=true;
-   $online=true;
-    $eventregister->status="<span id='register' class='w3-light-green w3-round-large w3-padding'>".$eventregister->status."</span>";}
-
-   
-return view('eventregister.show', ['eventregister'=>$eventregister,
-    'event'=>$event,
-    'online'=>$online,
-    'showform'=>$showform,
-    'showDeleteForm'=>$showDeleteForm]);
-    
-}
+        $online = null;
+        $showform = null;
+        $showDeleteForm = true;
+        if ($eventregister->status == 'New Registration Created') {
+            $showform = true;
+            $eventregister->status = "<span class='w3-pale-red w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        } elseif ($eventregister->status == 'Cancelled') {
+            $showform = true;
+            $eventregister->status = "<span id='register' class='w3-grey w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        } elseif ($eventregister->status == 'Confirmed: will pay in person') {
+            $showform = true;
+            $eventregister->status = "<span id='register' class='w3-blue w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        } elseif ($eventregister->status == 'Paid Online') {
+            $showform = false;
+            $online = false;
+            $showDeleteForm = false;
+            $eventregister->status = "<span id='register' class='w3-green w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        } else {
+            $showform = true;
+            $online = true;
+            $eventregister->status = "<span id='register' class='w3-light-green w3-round-large w3-padding'>" . $eventregister->status . "</span>";
+        }
 
 
-
+        return view('eventregister.show', [
+            'eventregister' => $eventregister,
+            'event' => $event,
+            'online' => $online,
+            'showform' => $showform,
+            'showDeleteForm' => $showDeleteForm
+        ]);
+    }
 }
