@@ -22,9 +22,8 @@ class ProgramsTableSeeder extends Seeder
             'description2' => 'Lorem ipsum dolor sit amet.',
             'tag' => 'Certification',
             'url' => 'https://www.w3schools.com/w3images/woods.jpg',
-            ]);
+        ]);
 
-        
         Program::create([
             'name' => 'Adventure Program',
             'title' => 'Adventure Program',
@@ -34,7 +33,7 @@ class ProgramsTableSeeder extends Seeder
             'description2' => 'Description Second Line for Adventure',
             'tag' => 'New',
             'url' => 'https://www.w3schools.com/w3images/forestbridge.jpg',
-            ]);
+        ]);
 
         Program::create([
             'name' => 'Leadership Program',
@@ -44,8 +43,7 @@ class ProgramsTableSeeder extends Seeder
             'description' => 'Leading with Justice In the Modern World',
             'description2' => 'Lorem ipsum dolor sit amet',
             'tag' => 'New',
-            'url' => 'https://www.w3schools.com/w3images/natureboy.jpg',
-            ]);            
-
+            'url' => 'https://www.w3schools.com/w3images/coffee.jpg',
+        ]);
     }
 }
