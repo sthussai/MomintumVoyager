@@ -12,6 +12,7 @@ class User extends \TCG\Voyager\Models\User
     use Notifiable;
     use Billable;
 
+
     /**
      * The attributes that are mass assignable.
      *
