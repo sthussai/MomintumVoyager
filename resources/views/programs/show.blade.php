@@ -11,9 +11,9 @@
 
     <div class='w3=content'>
 
-      <h2 class="w3-text-green">{{ $program->title }}</h2>
+      <h2 class="">{{ $program->title }}</h2>
       <div class="w3-display-container mySlides">
-        <img src="{{$program->url}}" style="width:80%;margin-bottom:-6px">
+        <img src="{{url('/storage/'.$program->url)}}" style="width:80%;max-width:400px;margin-bottom:6px">
       </div>
 
       <div class="w3-cell-row">

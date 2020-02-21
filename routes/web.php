@@ -30,7 +30,7 @@ Route::post('eventregister/confirm/{eventregister}', 'EventRegisterController@co
 /* PagesController */
 Route::get('/','PagesController@mmain');
 Route::get('/mmain','PagesController@mmain');
-Route::get('/program/{id}','PagesController@showprogram');
+Route::get('/program/{programTitle}','PagesController@showprogram');
 
 
 /* HomeController */

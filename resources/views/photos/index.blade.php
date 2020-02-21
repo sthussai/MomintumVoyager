@@ -3,6 +3,9 @@
 @section('title','Resturants Index')
 
 @section('content')
+<!-- END Hero Image div -->
+</div>
+
 <div class="w3-center    w3-panel w3-card">
                 <div class="links w3-center w3-large w3-bar w3-padding-large">
                     <a class="w3-btn" href="/photos">Home</a>           

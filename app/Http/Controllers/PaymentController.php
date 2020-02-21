@@ -21,7 +21,7 @@ class PaymentController extends Controller
 
     public function index(Request $request)
     {
-        session(['Event' => 'Successful Event Noted']);
+        session(['Event' => 'Processing Payments Through Stripe']);
 
         $user = Auth::user();
 

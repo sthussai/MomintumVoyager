@@ -1,8 +1,9 @@
-@extends('layouts.momintum')
+@extends("events.layout")
 
-@section('title','Create')
 
-@section('content')
+
+@section('content1')
+
 
 <div class="w3-center    w3-panel w3-card">
   <div class="links w3-center w3-large w3-bar w3-padding-large">

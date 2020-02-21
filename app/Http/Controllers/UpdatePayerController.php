@@ -17,6 +17,7 @@ class UpdatePayerController extends Controller
     //Add or Update Billing Information
     public function updateBillingInfo(Request $request)
     {
+        $request->session()->flush();
         $user = Auth::user();
 
         $stripe_id = $user->stripe_id;

@@ -7,26 +7,23 @@
 
 
 
-<div class="w3-center    w3-panel w3-card">
-
 <!-- START Payment Nav Bar -->
-                    <a class="w3-btn" href="/payment">Home</a>           
-                    <a class="w3-btn " href="/addpaymentmethod">Add Payment Method</a>
-                    <a class="w3-btn " href="/editbillinginfo">Update Billing Information</a>
+<div class="w3-center w3-text-white    w3-panel w3-card">
+
+    <a class="w3-btn" href="/payment">Home</a>
+    <a class="w3-btn " href="/addpaymentmethod">Add Payment Method</a>
+    <a class="w3-btn " href="/editbillinginfo">Update Billing Information</a>
 
 
-                </div>
-<!-- END Payment Nav Bar -->    
+</div>
+<!-- END Payment Nav Bar -->
 
-    </div>            
-
+</div>
+<!-- END HERO Image DIV -->
 @yield('content1')
 
 
 
 
 
- @endsection
-
-
-
+@endsection

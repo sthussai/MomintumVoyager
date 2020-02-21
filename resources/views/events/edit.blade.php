@@ -1,21 +1,17 @@
-@extends('layouts.momintum')
+@extends("events.layout")
 
 
-@section('content')
+
+@section('content1')
+
 <div class="w3-center    w3-panel w3-card">
-  <div class="links w3-center w3-large w3-bar w3-padding-large">
-    <a class="w3-btn" href="/events">Home</a>
-    <a class="w3-btn " href="/events/create">Create New Event</a>
 
-  </div>
 
   <!-- @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif -->
-
-  <h3 class='w3-center'>Edit Event</h3>
 
   <div>
     <form action="/events/{{ $event->id }}" method="POST"

@@ -5,7 +5,7 @@
 
 @if (session('Event'))
   @component('components.alert')
-  Hello {{ session('Event') }}
+   {{ session('Event') }}
   @endcomponent
 @endif
 

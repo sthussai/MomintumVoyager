@@ -3,6 +3,8 @@
 
 @section('content')
 
+</div>
+<!-- END Hero Image DIv -->
 
 <div class='w3-row-padding'>
 
