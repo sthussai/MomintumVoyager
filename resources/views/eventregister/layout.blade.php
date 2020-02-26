@@ -3,6 +3,12 @@
 
 @section('title','Event Registrations')
 
+@if (session('Notice'))
+  @component('components.alert')
+   {{ session('Notice') }}
+  @endcomponent
+@endif
+
 @section('content')
 
 <div class="w3-center  w3-text-white  w3-panel w3-card">

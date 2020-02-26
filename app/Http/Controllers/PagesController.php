@@ -8,16 +8,16 @@ class PagesController extends Controller
 {
     public function __construct()
     {
-        $this->program = new Program();
+        $this->model = new Program();
     }
 
     public function mmain()
     {
-        return $this->program->getAllProgramsAndPublishedPosts();
+        return $this->model->getAllProgramsAndPublishedPosts();
     }
 
     public function showProgram($programTitle)
     {
-        return $this->program->showProgram($programTitle);
+        return $this->mdodel->showProgram($programTitle);
     }
 }

@@ -46,7 +46,7 @@
 
     /* First image (Logo. Full height) */
     .bgimg-1 {
-      background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+      background-image: url('{{$hero_url ?? "https://www.w3schools.com/w3images/nature.jpg"}}');
       min-height: 100%;
       animation-name: example;
       animation-duration: 20s;

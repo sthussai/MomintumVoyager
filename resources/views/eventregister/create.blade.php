@@ -4,6 +4,15 @@
 
 @section('content1')
 
+@if ($errors->any())
+<div class="alert alert-danger">
+  <ul>
+    @foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+    @endforeach
+  </ul>
+</div>
+@endif
 
 <div class="w3-center    w3-panel w3-card">
 

@@ -4,9 +4,12 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\NextAndPreviousEvents;
 
 class Event extends Model
 {
+    use NextAndPreviousEvents;
+
     /**
      * The attributes that are not mass assignable.
      *
@@ -30,26 +33,19 @@ class Event extends Model
     public function showEvent($eventName)
     {
         $eventName = str_replace('_', ' ', $eventName);
+
         $event = Event::where('name', $eventName)->first();
 
-        $nextEvent = Event::where('id', $event->id + 1)->first();
-        if ($nextEvent) {
-            $nextEvent = $nextEvent->name;
-        } else {
-            $nextEvent = null;
-        }
-        $previousEvent = Event::where('id', $event->id - 1)->first();
-        if ($previousEvent) {
-            $previousEvent = $previousEvent->name;
-        } else {
-            $previousEvent = null;
-        }
+        $nextEvent = $this->nextEvent($event->id);
+
+        $previousEvent = $this->previousEvent($event->id);
+
         $eventregisters = EventRegister::where('event_id', $event->id)->get();
 
         return view('events.show', [
-            'event' => $event, 
-            'eventregisters' => $eventregisters, 
-            'nextEvent' => $nextEvent, 
+            'event' => $event,
+            'eventregisters' => $eventregisters,
+            'nextEvent' => $nextEvent,
             'previousEvent' => $previousEvent]);
-    }   
+    }
 }

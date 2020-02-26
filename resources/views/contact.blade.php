@@ -1,225 +1,376 @@
 <!DOCTYPE html>
 
 <html>
-<head>   
-<title>Profile</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<head>
+  <title>Profile</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<style>
-    
-    body {
-  background-color: #555;
-  font-family: Tahoma, Verdana, Segoe, sans-serif;
-}
-#text {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 270px;
-  height: 600px;
-  background-color: #555;
-  -webkit-box-shadow: 8px 0px 6px -6px #000000;
-  -moz-box-shadow: 8px 0px 6px -6px #000000;
-  box-shadow: 8px 0px 6px -6px #000000;
-}
-p {
-  position: relative;
-  top: 250px;
-}
-#wheelExt {
-  -webkit-box-shadow: 8px 6px 15px -6px #222222;
-  -moz-box-shadow: 8px 6px 15px -6px #222222;
-  box-shadow: 8px 6px 15px -6px #222222;
-  position: absolute;
-  top: 50px;
-  height: 500px;
-  width: 500px;
-  border: 3px solid #333;
-  border-radius: 50%;
-}
-#wheel {
-  position: absolute;
-  height: 500px;
-  width: 500px;
-  border-radius: 50%;
-  background-color: #ccc;
-  overflow: hidden;
-}
-#wheel div {
-  position: absolute;
-  left: 100px;
-  bottom: -10px;
-  -webkit-transform-origin: 50% 50%;
-  -moz-transform-origin: 50% 50%;
-  -ms-transform-origin: 50% 50%;
-  -o-transform-origin: 50% 50%;
-  transform-origin: 50% 50%;
-  border-style: solid;
-  border-width: 260px 150px;
-  box-sizing: border-box;
-}
-#wheel div.color01 {
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  border-color: #662a6c transparent transparent transparent;
-}
-#wheel div.color02 {
-  -webkit-transform: rotate(60deg);
-  -moz-transform: rotate(60deg);
-  -ms-transform: rotate(60deg);
-  -o-transform: rotate(60deg);
-  transform: rotate(60deg);
-  border-color: #2381ad transparent transparent transparent;
-}
-#wheel div.color03 {
-  -webkit-transform: rotate(120deg);
-  -moz-transform: rotate(120deg);
-  -ms-transform: rotate(120deg);
-  -o-transform: rotate(120deg);
-  transform: rotate(120deg);
-  border-color: #639b47 transparent transparent transparent;
-}
-#wheel div.color04 {
-  -webkit-transform: rotate(180deg);
-  -moz-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  -o-transform: rotate(180deg);
-  transform: rotate(180deg);
-  border-color: #e1e23b transparent transparent transparent;
-}
-#wheel div.color05 {
-  -webkit-transform: rotate(240deg);
-  -moz-transform: rotate(240deg);
-  -ms-transform: rotate(240deg);
-  -o-transform: rotate(240deg);
-  transform: rotate(240deg);
-  border-color: #f7941e transparent transparent transparent;
-}
-#wheel div.color06 {
-  -webkit-transform: rotate(300deg);
-  -moz-transform: rotate(300deg);
-  -ms-transform: rotate(300deg);
-  -o-transform: rotate(300deg);
-  transform: rotate(300deg);
-  border-color: #9a1d34 transparent transparent transparent;
-}
-#wheel span {
-  cursor: pointer;
-  position: absolute;
-  left: 370px;
-  bottom: 225px;
-  -webkit-transform-origin: -300% 0%;
-  -moz-transform-origin: -300% 0%;
-  -ms-transform-origin: -300% 0%;
-  -o-transform-origin: -300% 0%;
-  transform-origin: -300% 0%;
-}
-#wheel span.word {
-  font-size: 20px;
-  width: 40px;
-  float: right;
-}
-#wheel span.word01 {
-  top: 65%;
-}
-#wheel span.word02 {
-  top: 85%;
-  left: 40%;
-}
-#wheel span.word03 {
-  top: 65%;
-  left: 15%;
-}
-#wheel span.word04 {
-  left: 13%;
-  top: 35%;
-}
-#wheel span.word05 {
-  left: 44%;
-  top: 15%;
-}
-#wheel span.word06 {
-  left: 70%;
-  top: 35%;
-}
-#wheel:before {
-  position: absolute;
-  height: 450px;
-  width: 450px;
-  left: 25px;
-  top: 25px;
-  background-color: #222;
-  border-radius: 50%;
-  -webkit-transform-origin: 50px 150px;
-  -moz-transform-origin: 50px 150px;
-  -ms-transform-origin: 50px 150px;
-  -o-transform-origin: 50px 150px;
-  transform-origin: 50px 150px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-}
-#wheel:before:hover {
-  -webkit-transform: rotate(540deg);
-  -moz-transform: rotate(540deg);
-  -ms-transform: rotate(540deg);
-  -o-transform: rotate(540deg);
-  transform: rotate(540deg);
-}
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
+    integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous">
+  </script>
+
+  <style>
+    body,
+    html {
+      height: 100%;
+    }
+
+    /* First image (Logo. Full height) */
+    .bgimg-1 {
+      background-image: url('{{$hero_url ?? "https://www.w3schools.com/w3images/forestbridge.jpg"}}');
+      min-height: 100%;
+      animation-name: example;
+      animation-duration: 20s;
+      animation-iteration-count: 2;
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    @import url('https://fonts.googleapis.com/css?family=Rubik:400,700');
+
+    * {
+      font-family: 'Rubik', sans-serif;
+    }
+
+    #form {
+      margin: 50px auto;
+      width: 400px;
+      padding: 0px;
+      position: relative;
+      box-shadow: 5px 5px 25px rgba(0, 0, 0, .2);
+      border-radius: 1px;
+      background-color: #2c3e50;
+      height: 600px;
+      overflow: hidden
+    }
+
+    #form #toggle-forms {
+      position: absolute;
+      margin: 15px;
+      width: 90%;
+      border-radius: 1px;
+      overflow: hidden;
+      z-index: 99
+    }
+
+    #form #toggle-forms>button {
+      border: none;
+      background: none;
+      background-color: #34495e;
+      color: #FFF;
+      width: 49%;
+      padding: 2px 10px;
+    }
+
+    #form #toggle-forms>button:first-of-type {
+      border-right: 0;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+
+    }
+
+    #form #toggle-forms>button.active {
+      background-color: #3498db;
+    }
+
+    .input-field label.active {
+      color: #FFF !important;
+      font-size: 1.1rem
+    }
+
+    #form form input:focus {
+      border-bottom-color: dodgerblue !important
+    }
+
+    #form .row>button {
+      background-color: dodgerblue
+    }
 
 
 
+    #form form {
+      padding: 45px 40px 15px;
+      position: absolute;
+      top: 50px;
+      height: 100%;
+      width: 100%;
+      transition: all .3s linear;
+      z-index: 2
+    }
+
+    #form form:last-of-type {
+      left: 100%
+    }
+
+    #form.active form:first-of-type {
+      left: -100% !important
+    }
+
+    #form.active form:last-of-type {
+      left: 0 !important
+    }
+
+    @media (max-width: 767px) {
+      #form {
+        width: 290px !important;
+      }
+    }
+
+    .animate {
+      height: 100%;
+      display: block;
+      margin: 10;
+      padding: 0;
+      width: 100%
+    }
+
+    .animate>li {
+      position: absolute;
+      height: 50px;
+      width: 2px !important;
+      top: 100%;
+      left: 10px;
+      background-color: rgba(255, 255, 255, .1);
+      z-index: -1;
+      overflow: hidden;
+      animation: move 10s linear infinite;
+    }
+
+    .animate>li:nth-last-of-type(2) {
+      left: 70px;
+      animation-delay: 3.5s;
+      height: 15px;
+      width: 15px;
+    }
+
+    .animate>li:nth-last-of-type(3) {
+      left: 140px;
+      animation-delay: 3s
+    }
+
+    .animate>li:nth-last-of-type(4) {
+      left: 210px;
+      animation-delay: 5.5s
+    }
+
+    .animate>li:nth-last-of-type(5) {
+      left: 280px;
+      animation-delay: 1.8s;
+      height: 65px;
+      width: 65px
+    }
+
+    .animate>li:nth-last-of-type(6) {
+      left: 140px;
+      animation-delay: 6.8s;
+      height: 25px;
+      width: 25px
+    }
+
+    .animate>li:nth-last-of-type(7) {
+      left: 280px;
+      animation-delay: 5s;
+      height: 35px;
+      width: 35px
+    }
+
+    .row {
+      position: relative;
+      margin-top: 35px;
+    }
 
 
+    input {
+      display: block;
+      padding: 8px 12px;
+      width: 100%;
+      height: 50px;
+      max-width: 350px;
+      border-radius: 5px;
+      border: 2px solid grey;
+      color: #777777;
+      font-size: 20px;
+    }
+
+    label {
+      position: absolute;
+      font-weight: 600;
+      color: #777777;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -webkit-transform: translateY(-50%);
+      cursor: text;
+      user-select: none;
+      transition: 0.15s ease-in-out;
+    }
+
+    /* input[data-empty="false"] + label, */
+    input:valid+label,
+    input:focus+label {
+      top: -10px;
+      left: 0px;
+      font-size: 10px;
+      color: #ffffff;
+    }
+
+    #checkbox {
+      font-size: 20px;
+
+    }
+
+    @keyframes move {
+      to {
+        top: -50px
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <!--  START of HERO Image div  -->
+  <div class="bgimg-1 w3-display-container w3-padding-32" id="hero_div">
+
+    <section id="form" class="w3-opacity-min w3-animate-zoom">
+      <div id="toggle-forms">
+        <div class="">
+          <a href="{{ url('/') }}" class="w3-padding w3-large w3-blue-grey w3-margin-bottom w3-btn ">{{
+            config('app.name', 'Laravel') }}</a>
+        </div>
+        <button class="waves-effect waves-light w3-large w3-padding active" id="login">Login</button>
+        <button class="waves-effect waves-light w3-large w3-padding" id="register">Register</button>
+
+      </div>
 
 
-</style>
-</head> 
+      <form class="col s12 w3-text-white">
 
-<body >
+        <div class="row">
+          <h4 class="w3-text-white w3-large">Welcome</h4>
+        </div>
+
+        <div class="row">
+          <input id="email " name="email" required type="email">
+          <label for="email">Email</label>
+        </div>
+        <div class="row">
+          <input id="name" type="password" required>
+          <label for="name">Password</label>
+
+        </div>
+
+        <div class="row " style="margin-top:25px">
+          <input class="w3-check" style="padding:-15px;" type="checkbox">
+          <span id="checkbox" style="font-size:15px;padding:15px;" for="checkbox">Remember Me</span>
+        </div>
+
+        <div class=" row " style="margin-top:25px">
+          <button class="btn w3-button w3-blue-grey w3-padding w3-large waves-effect waves-light">
+            Login
+          </button>
+        </div>
+
+        <div class="row">
+          <label for="reset" class="w3-text-white">Password lost? <span class="w3-hover-shadow"
+              style="cursor:pointer; text-decoration: underline;">Reset</span></label>
+        </div>
+        <div class="row">
+          <label for="register" class="w3-text-white">Not registered? <span class="w3-hover-shadow"
+              style="cursor:pointer; text-decoration: underline;">Register</span></label>
+        </div>
+
+        <ul class="animate">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </form>
 
 
-<div id='wheelExt'>
-  <div id="wheel">
-    <div class="wheel_part color01"></div>
-    <div class="wheel_part color02"></div>
-    <div class="wheel_part color03"></div>
-    <div class="wheel_part color04"></div>
-    <div class="wheel_part word color05"></div>
-    <div class="wheel_part word color06"></div>
-    <span class="wheel_part w3-green word word01">Deen</span>
-    <span class="wheel_part word word02">Momintum</span>
-    <span class="wheel_part word word03">Projects</span>
-    <span class="wheel_part word word04">Adventure</span>
-    <span class="wheel_part word word05">Social</span>
-    <span class="wheel_part word word06">Leadership</span>
+      <form class="col w3-text-white s12">
+
+
+        <div class="row center-align">
+          <h4 class="w3-text-white w3-large">New User Registertion</h4>
+        </div>
+        <div class="row" style="margin-top:25px">
+          <input id="name " name="name" required type="name">
+          <label for="name">Name</label>
+        </div>
+        <div class="row">
+          <input id="email " name="email" required type="email">
+          <label for="email">Email</label>
+        </div>
+        <div class="row">
+          <input id="password" type="password" required>
+          <label for="password">Password</label>
+
+        </div>
+
+        <div class="row">
+          <input id="confirmPassword" type="password" required>
+          <label for="confirmPassword">Confirm Password</label>
+
+        </div>
+        <div class="row">
+          <button class="btn w3-button w3-blue-grey w3-padding w3-large waves-effect waves-light">
+            Register
+          </button>
+        </div>
+        <ul class="animate">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </form>
+
+
+    </section>
+
   </div>
-</div>
 
+  <script>
+    let $id = (id) => document.getElementById(id);
+    var [login, register, form] = ['login', 'register', 'form'].map(id => $id(id));
 
-
-
-
-
-
-
-
-
-
-
+    [login, register].map(element => {
+      element.onclick = function() {
+        [login, register].map($ele => {
+          $ele.classList.remove("active");
+        });
+        this.classList.add("active");
+        this.getAttribute("id") === "register" ? form.classList.add("active") : form.classList.remove("active");
+      }
+    });
+  </script>
 
 </body>

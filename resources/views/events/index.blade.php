@@ -11,13 +11,14 @@
   <h1>All Events </h1>
 
 
+  
 
-
-
+  
   @foreach ($events as $event)
 
   <!-- Start Event Listing 1 -->
-  <a href="/events/{{str_replace(' ', '_',$event->name)}}" class='w3-row-padding w3-content w3-large' style="solid 2px blue">
+  <a href="/events/{{str_replace(' ', '_',$event->name)}}" class='w3-row-padding w3-content w3-large'
+    style="solid 2px blue">
     <div class='w3-mobile w3-col l4 m5 s12' style="solid 2px red">
       <img class='w3-image' src="{{$event->url}}" style="max-height:250px;solid 2px red">
     </div>

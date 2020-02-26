@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
-use App\EventRegister;
 
 class EventController extends Controller
 {
+    
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
@@ -23,6 +23,8 @@ class EventController extends Controller
     {
         return $this->event->getAllEvents();
     }
+
+   
 
     /**
      * Display the specified resource.
@@ -42,7 +44,6 @@ class EventController extends Controller
      */
     public function create()
     {
-
         return view('events.create');
     }
 
