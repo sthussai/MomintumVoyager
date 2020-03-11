@@ -14,8 +14,8 @@ class UpdateEventRegistersTable extends Migration
     public function up()
     {
         Schema::table('event_registers', function (Blueprint $table) {
-            $table->dropColumn('unique_id');
-            $table->unique(['owner_id', 'event_id']);
+            // $table->dropColumn('unique_id');
+            // $table->unique(['owner_id', 'event_id']);
         });
     }
 

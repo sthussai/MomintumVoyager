@@ -65,7 +65,8 @@
       @foreach ($events as $event)
       <!-- Section 1 of 3 -->
 
-      <a href="/events/{{$event->id}}" class="w3-col w3-center l6 m6 w3-margin-top " style="solid 2px red ">
+      <a href="/events/{{str_replace(' ', '_',$event->name)}}" class="w3-col w3-center l6 m6 w3-margin-top "
+        style="solid 2px red ">
         <div class="w3-container w3-card  w3-padding w3-btn w3-block" style="solid 2px blue">
           <h3>{{$event->name}}</h3>
 

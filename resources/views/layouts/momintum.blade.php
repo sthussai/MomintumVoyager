@@ -237,4 +237,9 @@
     <!-- Footer -->
     <footer class="w3-container w3-theme-d3 w3-padding-16">
       <h5>Footer</h5>
+      @auth
+      @if(Auth::user()->last_login_at)
+      <a href="test" class="w3-right">Last Login On: {{Auth::user()->last_login_at->toDayDateTimeString()}}</a>
+      @endif
+      @endauth
     </footer>

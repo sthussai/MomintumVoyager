@@ -73,25 +73,11 @@ class EventRegisterController extends Controller
      */
     public function show(EventRegister $eventregister)
     {
-        $this->EventRegister->showEventRegistration($eventregister);
-        dd($eventregister);
-        $event = Event::find($eventregister->event_id);
-
-        //        $eventregister = collect([$eventregister, $event])->collapse();
-        $eventregister = collect(['eventregister' => $eventregister, 'event' => $event]);
-
-        ($eventregister['eventregister']->name);
-        //$eventregister->put('price', 100);
-        $eventregister->toArray();
-
-        //        dd($eventregister['price']);
-//        dd($eventregister[0]->name . '<br>' . $eventregister[1]->name);
+        $eventregister = $this->EventRegister->showEventRegistration($eventregister);
+        $event = Event::find($eventregister['eventregister']->event_id);
         return view('eventregister.show', [
             'eventregister' => $eventregister,
             'event' => $event,
-            'online' => $online,
-            'showform' => $showform,
-            'showDeleteForm' => $showDeleteForm
         ]);
     }
 
@@ -151,40 +137,30 @@ class EventRegisterController extends Controller
     //This method updates the event registration status
     public function confirm(Request $request, EventRegister $eventregister)
     {
-        $eventregister->status = $request->status;
-        $eventregister->save();
+        if ($this->requestStatusChecked($request)) {
+            $eventregister->status = $request->status;
+            $eventregister->save();
+            $eventregister = $this->EventRegister->showEventRegistration($eventregister);
+            $event = Event::find($eventregister['eventregister']->event_id);
 
-        $event = Event::find($eventregister->event_id);
-
-        $online = null;
-        $showform = null;
-        $showDeleteForm = true;
-        if ($eventregister->status == 'New Registration Created') {
-            $showform = true;
-            $eventregister->status = "<span class='w3-pale-red w3-round-large w3-padding'>" . $eventregister->status . '</span>';
-        } elseif ($eventregister->status == 'Cancelled') {
-            $showform = true;
-            $eventregister->status = "<span id='register' class='w3-grey w3-round-large w3-padding'>" . $eventregister->status . '</span>';
-        } elseif ($eventregister->status == 'Confirmed: will pay in person') {
-            $showform = true;
-            $eventregister->status = "<span id='register' class='w3-blue w3-round-large w3-padding'>" . $eventregister->status . '</span>';
-        } elseif ($eventregister->status == 'Paid Online') {
-            $showform = false;
-            $online = false;
-            $showDeleteForm = false;
-            $eventregister->status = "<span id='register' class='w3-green w3-round-large w3-padding'>" . $eventregister->status . '</span>';
-        } else {
-            $showform = true;
-            $online = true;
-            $eventregister->status = "<span id='register' class='w3-light-green w3-round-large w3-padding'>" . $eventregister->status . '</span>';
+            return view('eventregister.show', [
+                'eventregister' => $eventregister,
+                'event' => $event,
+            ]);
         }
+    }
 
-        return view('eventregister.show', [
-            'eventregister' => $eventregister,
-            'event' => $event,
-            'online' => $online,
-            'showform' => $showform,
-            'showDeleteForm' => $showDeleteForm
-        ]);
+
+/*     Check that the event status in the request is one of the valid acceptable options. */ 
+    public function requestStatusChecked(Request $request)
+    {
+        if ($request->status === 'New Registration Created' || $request->status === 'Confirmed: will pay in person' ||
+        $request->status === 'Cancelled' || $request->status === 'Paid Online' ||
+        $request->status === 'Confirmed: Pending payment online') {
+            return true;
+        } else {
+            $request->session()->flash('Notice', 'Please Select a Valid Event Status!');
+            return back();
+        }
     }
 }

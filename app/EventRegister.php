@@ -33,6 +33,6 @@ class EventRegister extends Model
     public function showEventRegistration($eventregister)
     {
         $eventregister = $this->styleStatus($eventregister);
-        
-    }
+        return($eventregister);
+    }   
 }

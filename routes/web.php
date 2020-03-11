@@ -91,4 +91,12 @@ Route::get('/about', function () {
     return view('about');
 });
 
+Route::get('/radmap', function () {
+    return view('radmap');
+});
+
+Route::get('/radmaptest', function () {
+    return view('radmaptest');
+});
+
 Auth::routes();

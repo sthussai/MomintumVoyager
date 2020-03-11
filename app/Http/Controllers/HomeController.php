@@ -19,7 +19,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('musers');
+        $this->middleware('auth')->except(['test', 'musers']);
     }
 
     /**
@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');    
+        return view('home');
     }
 
     public function musers()
@@ -43,6 +43,7 @@ class HomeController extends Controller
     {
         $events = Event::paginate(4);
         $user = Auth::user();
+        dd($user->last_login_at);
         $eventregisters = EventRegister::where('owner_id', auth()->id())->get();
         $activityreports = ActivityReport::where('owner_id', auth()->id())->get();
 
@@ -64,12 +65,10 @@ class HomeController extends Controller
     //test function to turn on/off admin features
     public function test()
     {
+//        dd(request()->ip());
         $user = Auth::user();
-        if ($user->hasPermissionTo('admin')) {
-            $user->revokePermissionTo('admin');
-        } elseif (!$user->hasPermissionTo('admin')) {
-            $user->givePermissionTo('admin');
-        }
-        return back();
+        $ip = '2001:56a:f9a3:fd00:c84b:a911:3015:624b';
+        $data = \Location::get($ip);
+        dd($data);
     }
 }

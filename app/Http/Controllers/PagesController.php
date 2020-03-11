@@ -18,6 +18,6 @@ class PagesController extends Controller
 
     public function showProgram($programTitle)
     {
-        return $this->mdodel->showProgram($programTitle);
+        return $this->model->showProgram($programTitle);
     }
 }
