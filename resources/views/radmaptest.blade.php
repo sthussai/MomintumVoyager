@@ -11,16 +11,21 @@
 
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- Styles -->
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
 		integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
 		crossorigin="" />
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> 
 
-	<!-- Scripts -->
+		<!-- Scripts -->
 	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
 		integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
 		crossorigin=""></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-realtime/2.2.0/leaflet-realtime.min.js"></script>
+
+	<!-- Leaflet Opacity Control Plugin -->
 
 
 	<style>
@@ -39,75 +44,135 @@
 		#mapid {
 			height: 580px;
 		}
+		.leaflet-fade-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-zoom-animated { will-change:auto !important; }
+
+
+#myBtn {
+  display: block; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 1499; /* Make sure it does not overlap */
+  border: solid 2px grey ; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: white; /* Set a background color */
+  color: darkgrey; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 10px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+
 	</style>
 </head>
 
 
 <body>
 
-	<div id="map"></div>
+	<div id="map">
+	<button class="" onclick="locateMe()" id="myBtn" title="Find My Location">Find Me</button>
+	</div>
 
 	<script>
+
+
 		var center = [53.520742, -113.523992];
 
-		var mymap = L.map('map').setView(center, 20);
+		var littleton = L.marker([53.521217, -113.522732]).bindPopup('Main Entrance.'),
+    denver    = L.marker([53.51978872112979, -113.52213084697725]).bindPopup('Parking'),
+    aurora    = L.marker([53.52067209847866, -113.52413713932039]).bindPopup('Radiology Department'),
+    golden    = L.marker([53.521326, -113.524185]).bindPopup('Help Desk');
 
-		L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+	var cities = L.layerGroup([littleton, denver, aurora, golden]);
+
+	//	var mymap = L.map('map').setView(center, 20);
+
+	var main = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 			attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-			maxZoom: 18,
+			maxZoom: 20,
 			id: 'mapbox/streets-v11',
 			tileSize: 512,
 			zoomOffset: -1,
 			accessToken: 'pk.eyJ1IjoiZGV2dGVra2VuNDgyIiwiYSI6ImNrN21nN2oxdTAwMHMzZW4xc3hwcmljdnMifQ.1bf42iYapSNIQ_PS8D9DbQ'
-		}).addTo(mymap);
-
-
-		var popup = L.popup();
-
-		function onMapClick(e) {
-			popup
-				.setLatLng(e.latlng)
-				.setContent("You clicked the map at " + e.latlng.toString());
-		}
-
-		mymap.on('click', onMapClick);
-
-		mymap.locate({
-			setView: true,
-			maxZoom: 18
 		});
 
-		function onLocationFound(e) {
-			var radius = e.accuracy;
+		var imageUrl2 = 'http://almasrepair.com/images/floorplan1.png',
+    imageBounds = [[53.522184, -113.525419], [53.519451, -113.521535]],
+    firstFloor = L.imageOverlay(imageUrl2, imageBounds).setOpacity(0.7);
 
-			L.marker(e.latlng).addTo(mymap)
-				.bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-			L.circle(e.latlng, radius).addTo(mymap);
-		}
+		var map = L.map('map', {
+    center: [53.520742, -113.523992],
+    zoom: 18,
+    layers: [main, cities, firstFloor]
+});
 
-		mymap.on('locationfound', onLocationFound);
-
-		function onLocationError(e) {
-			alert(e.message);
-		}
-
-		mymap.on('locationerror', onLocationError);
 
 		// add a marker in the given location
 		var upperCorner = [53.521833, -113.525398];
 		var lowerCorner = [53.519451, -113.521535];
-
-		L.marker(upperCorner).addTo(mymap);
-		L.marker(lowerCorner).addTo(mymap);
 
 		var imageUrl = 'http://almasrepair.com/images/floorplan2.png',
 			imageBounds = [
 				upperCorner,
 				lowerCorner
 			];
-		var opacity = 0.6;
-		L.imageOverlay(imageUrl, imageBounds).addTo(mymap).setOpacity(0.7);
+		var secondFloor = L.imageOverlay(imageUrl, imageBounds).setOpacity(0.7);
+
+var baseMaps = {
+    "Main": main
+};
+
+var overlayMaps = {
+	"Markers": cities,
+	"First Floor": firstFloor,
+	"Second Floor": secondFloor,
+};
+
+L.control.layers(baseMaps, overlayMaps).addTo(map);
+
+		var clickpopup = L.popup();
+
+function onMapClick(e) {
+    clickpopup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
+
+
+
+function locateMe() {
+	map.locate({
+			setView: true,
+			maxZoom: 18
+		});
+}
+
+
+function onLocationFound(e) {
+			var radius = e.accuracy;
+			console.log(e);
+			L.marker(e.latlng).addTo(map)
+				.bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+			L.circle(e.latlng, radius).addTo(map);
+		}
+
+		map.on('locationfound', onLocationFound);
+
+		function onLocationError(e) {
+			alert(e.message);
+		}
+
+		map.on('locationerror', onLocationError);
+
+
+		
 	</script>
 </body>
 

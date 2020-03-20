@@ -95,8 +95,7 @@
       <!-- Start Article Section 1 of 3 -->
       <div class='w3-row-padding w3-content w3-large' style="solid 2px blue">
         <div class='w3-mobile w3-col l4 m5 s12' style="solid 2px red">
-          <img class='w3-image' src="http://localhost:8000/storage/{{$post->image}}"
-            style="max-height:250px;solid 2px red">
+          <img class='w3-image' src="{{url('/storage/'.$post->image)}}" style="max-height:250px;solid 2px red">
         </div>
         <div class='w3-mobile w3-col l8 m7 s12' style="margin-top:10px; solid 2px red;">
           <h3><b>{{$post->title}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">New</span></h3>

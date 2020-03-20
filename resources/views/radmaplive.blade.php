@@ -39,7 +39,6 @@
 		#mapid {
 			height: 580px;
 		}
-
 		.leaflet-fade-anim .leaflet-tile,.leaflet-zoom-anim .leaflet-zoom-animated { will-change:auto !important; }
 
 	</style>
@@ -49,7 +48,8 @@
 <body>
 
 	<div id="map"></div>
-    <script>
+	<form id="form" action="test" method="GET" style="display: none;">@csrf</form>
+	<script>
 		var center = [53.520742, -113.523992];
 
 		var mymap = L.map('map').setView(center, 20);
@@ -63,58 +63,44 @@
 			accessToken: 'pk.eyJ1IjoiZGV2dGVra2VuNDgyIiwiYSI6ImNrN21nN2oxdTAwMHMzZW4xc3hwcmljdnMifQ.1bf42iYapSNIQ_PS8D9DbQ'
 		}).addTo(mymap);
 
-
-
-
-		mymap.locate({
-			setView: true,
-			maxZoom: 18
-		});
-
-		function onLocationFound(e) {
-			var radius = e.accuracy;
-			console.log(e);
-			L.marker(e.latlng).addTo(mymap)
-				.bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-			L.circle(e.latlng, radius).addTo(mymap);
-		}
-
-		mymap.on('locationfound', onLocationFound);
-
-		function onLocationError(e) {
-			alert(e.message);
-		}
-
-		mymap.on('locationerror', onLocationError);
+		var radpopup = L.popup()
+    .setLatLng([53.52067209847866, -113.52413713932039])
+    .setContent("Radiology Department")
+    .openOn(mymap);
+	
 
 		// add a marker in the given location
 		var upperCorner = [53.521833, -113.525398];
 		var lowerCorner = [53.519451, -113.521535];
 
-		L.marker(upperCorner).addTo(mymap);
-		L.marker(lowerCorner).addTo(mymap);
+		//L.marker(upperCorner).addTo(mymap);
+		//L.marker(lowerCorner).addTo(mymap);
 
 		var imageUrl = 'http://almasrepair.com/images/floorplan2.png',
 			imageBounds = [
 				upperCorner,
 				lowerCorner
 			];
-		var opacity = 0.6;
 		L.imageOverlay(imageUrl, imageBounds).addTo(mymap).setOpacity(0.7);
 
-		var popup = L.popup();
 
-		function onMapClick(e) {
-			console.log(e.latlng);
-			popup
-				.setLatLng(e.latlng)
-				.setContent("You clicked the map at " + e.latlng.toString());
-		}
+		realtime = L.realtime({
+			
+			url: "{{secure_url('/test')}}",
+			crossOrigin: true,
+			type: 'json'
+		}, {
+			interval: 1 * 1000
+		}).addTo(mymap);
 
-		mymap.on('click', onMapClick);
+		realtime.on('update', function() {
+			mymap.fitBounds(realtime.getBounds(), {
+				maxZoom: 18
+			});
+		});
 
 
+		
 	</script>
 </body>
 

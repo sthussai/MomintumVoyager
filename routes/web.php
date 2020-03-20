@@ -25,6 +25,8 @@ Route::get('eventregister/create/{eventid}', 'EventRegisterController@create');
 Route::post('eventregister/confirm/{eventregister}', 'EventRegisterController@confirm');
 
 /* PagesController */
+//Route::get('/', 'PagesController@mmain');
+
 Route::get('/', 'PagesController@mmain');
 Route::get('/mmain', 'PagesController@mmain');
 Route::get('/program/{programTitle}', 'PagesController@showprogram');
@@ -94,9 +96,16 @@ Route::get('/about', function () {
 Route::get('/radmap', function () {
     return view('radmap');
 });
+Route::get('/mtest', function () {
+    return view('momintum.mtest');
+});
 
 Route::get('/radmaptest', function () {
     return view('radmaptest');
+});
+
+Route::get('/radmaplive', function () {
+    return view('radmaplive');
 });
 
 Auth::routes();

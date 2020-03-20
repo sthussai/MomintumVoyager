@@ -44,4 +44,17 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $dispatchesEvents = [
+
+        'saved' => \App\Events\UserRegistered::class,
+     
+     ];
+
+    public function eventregisters()
+    {
+        return $this->hasMany('App\EventRegister','owner_id');
+    }
+
+
 }
