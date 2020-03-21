@@ -46,15 +46,10 @@ class User extends \TCG\Voyager\Models\User
     ];
 
     protected $dispatchesEvents = [
-
-        'saved' => \App\Events\UserRegistered::class,
-     
-     ];
+    ];
 
     public function eventregisters()
     {
-        return $this->hasMany('App\EventRegister','owner_id');
+        return $this->hasMany('App\EventRegister', 'owner_id');
     }
-
-
 }

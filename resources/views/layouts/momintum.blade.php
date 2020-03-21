@@ -61,6 +61,13 @@
 
 <body>
 
+@if (session('login-success'))
+  @component('components.alert')
+  {{ session('login-success') }}
+  @endcomponent
+@endif
+
+
   <!-- Sidebar/menu -->
 
 
