@@ -86,7 +86,7 @@
 
 		realtime = L.realtime({
 			
-			url: "{{secure_url('/test')}}",
+			url: "{{url('/test')}}",
 			crossOrigin: true,
 			type: 'json'
 		}, {

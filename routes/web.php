@@ -33,7 +33,7 @@ Route::get('/program/{programTitle}', 'PagesController@showprogram');
 
 /* HomeController */
 Route::get('/mprofile', 'HomeController@mprofile');
-Route::get('/musers', 'HomeController@musers');
+Route::get('admin/musers', 'HomeController@musers');
 Route::get('/test', 'HomeController@test');
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -85,8 +85,8 @@ Route::get('/mevent', function () {
     return view('momintum.mevent');
 });
 
-Route::get('/contact', function () {
-    return view('contact');
+Route::get('/welcome', function () {
+    return view('welcome');
 });
 
 Route::get('/about', function () {
@@ -106,6 +106,10 @@ Route::get('/radmaptest', function () {
 
 Route::get('/radmaplive', function () {
     return view('radmaplive');
+});
+
+Route::get('/vendor/voyager/gravy', function () {
+    return view('/vendor/voyager/gravy');
 });
 
 Auth::routes();
