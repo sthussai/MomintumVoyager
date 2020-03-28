@@ -35,6 +35,7 @@ Route::get('/program/{programTitle}', 'PagesController@showprogram');
 Route::get('/mprofile', 'HomeController@mprofile');
 Route::get('admin/musers', 'HomeController@musers');
 Route::get('/test', 'HomeController@test');
+Route::get('/locationinfo', 'HomeController@locationinfo');
 Route::get('/home', 'HomeController@index')->name('home');
 
 /* ActivityReportController */
@@ -73,6 +74,10 @@ Route::post('/updateuser', 'UpdateUserController@store');
 Route::post('/enablestripe', 'EnableStripeController');
 
 /* Individual Routes */
+Route::get('/almasrepair', function () {
+    return view('almasrepair.home');
+});
+
 Route::get('/eia', function () {
     return view('eia.home');
 });

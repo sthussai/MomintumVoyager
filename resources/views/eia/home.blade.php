@@ -121,14 +121,14 @@
 
   /* Second image (Portfolio) */
   .bgimg-2 {
-    background-image: url("http://hsigroup.online/images/eia/building.jpg");
+    background-image: url("https://www.w3schools.com/w3images/forestbridge.jpg");
     min-height: 400px;
 
   }
 
   /* Third image (Contact) */
   .bgimg-3 {
-    background-image: url('http://hsigroup.online/images/eia/mountains.jpg');
+    background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
     min-height: 400px;
   }
 

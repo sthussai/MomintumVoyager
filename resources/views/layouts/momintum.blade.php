@@ -357,7 +357,7 @@
       <h5>Footer</h5>
       @auth
       @if(Auth::user()->last_login_at)
-      <a href="test" class="w3-right">Last Login On: {{Auth::user()->last_login_at->toDayDateTimeString()}}</a>
+      <a href="locationinfo" class="w3-right">Last Login On: {{Auth::user()->last_login_at->toDayDateTimeString()}}</a>
       @endif
       @endauth
     </footer>

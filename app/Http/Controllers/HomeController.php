@@ -44,20 +44,8 @@ class HomeController extends Controller
     {
         $events = Event::paginate(4);
         $user = Auth::user();
-        dd($user->last_login_at);
         $eventregisters = EventRegister::where('owner_id', auth()->id())->get();
         $activityreports = ActivityReport::where('owner_id', auth()->id())->get();
-
-        /*         if ($user->subscribed('Momintum')) {
-                    //
-                    $message='Subscribed to momintum!';
-                } else{$message='No subscriptions';}
-
-                if ($user->hasPaymentMethod()) {
-                    //
-                    $cardonfile='Yes';
-                }else{$cardonfile='No Card on file';} */
-
         $message = null;
         $cardonfile = null;
         return view('momintum.mprofile', ['user' => $user, 'cardonfile' => $cardonfile, 'message' => $message, 'events' => $events, 'eventregisters' => $eventregisters, 'activityreports' => $activityreports]);
@@ -107,12 +95,12 @@ class HomeController extends Controller
         return($response);
     }
 
-    public function locationtest()
+    public function locationinfo()
     {
-//        dd(request()->ip());
         $user = Auth::user();
         $ip = '2001:56a:f9a3:fd00:c84b:a911:3015:624b';
+        $data = \Location::get($user->last_login_ip);
         $data = \Location::get($ip);
-        dd($data);
+        return view('momintum.mlocation', ['user' => $user, 'data' => $data]);
     }
 }
