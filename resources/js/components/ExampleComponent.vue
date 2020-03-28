@@ -6,7 +6,7 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        I'm an example component. Test Tage
                     </div>
                 
   
@@ -31,7 +31,8 @@
             .listen('SendPosition',(e)=>{
                 console.log(e);
             });
-        }
+        },
+        
     }
 </script>
 

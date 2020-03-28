@@ -17,7 +17,7 @@
     <div class="w3-rest">
       <input class="w3-input w3-border w3-gray" name="user_id" type='hidden' value="{{ Auth::id()}}">
       <input class="w3-input w3-border w3-gray" name="eventregister_id" type='hidden'
-        value="{{ $eventregister['eventregister']->id}}">
+        value="{{ $eventregister['registration']->id}}">
       <input class="w3-input w3-border w3-gray" name="cost" type='hidden' value="{{ $event->cost}}">
       <input class="w3-input w3-border w3-gray" name="email" value="{{ Auth::user()->email}}">
     </div>

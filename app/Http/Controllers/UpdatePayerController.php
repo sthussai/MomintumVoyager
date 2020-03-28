@@ -17,7 +17,6 @@ class UpdatePayerController extends Controller
     //Add or Update Billing Information
     public function updateBillingInfo(Request $request)
     {
-        $request->session()->flush();
         $user = Auth::user();
 
         $stripe_id = $user->stripe_id;
@@ -40,7 +39,7 @@ class UpdatePayerController extends Controller
         return redirect('payment')->with('status', 'Billing Information Updated Successfully!');
     }
 
-    //Form to Add new payment methos
+    //Form to Add new payment methods
     public function add()
     {
         $user = auth()->user();

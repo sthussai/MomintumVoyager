@@ -1,6 +1,7 @@
 @extends('layouts.momintum')
 
-
+<link href="{{ asset('css/stripe.css') }}" rel="stylesheet">
+<script src="https://js.stripe.com/v3/"></script>
 @section('title','Payments')
 
 @section('content')

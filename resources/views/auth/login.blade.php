@@ -97,7 +97,9 @@
         }
 
         #form form input:focus {
-            border-bottom-color: dodgerblue !important
+            border-width: 5px;
+            border-color: dodgerblue !important;
+
         }
 
         #form .row>button {
@@ -148,7 +150,7 @@
             width: 2px !important;
             top: 100%;
             left: 10px;
-            background-color: rgba(255, 255, 255, .1);
+            background-color: rgba(255, 255, 255, .2);
             z-index: -1;
             overflow: hidden;
             animation: move 10s linear infinite;
@@ -245,65 +247,66 @@
 
         }
 
-        .loader{
-  width: 20px;
-  height: 20px;
-  border-radius: 100%;
-  position: relative;
-  display: none;
-}
+        .loader {
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            position: relative;
+            display: none;
+        }
 
-/* LOADER 1 */
+        /* LOADER 1 */
 
-#loader-1:before, #loader-1:after{
-  content: "";
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 100%;
-  height: 100%;
-  border-radius: 100%;
-  border: 3px solid transparent;
-  border-top-color: #3498db;
-}
+        #loader-1:before,
+        #loader-1:after {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            border: 3px solid transparent;
+            border-top-color: #3498db;
+        }
 
-#loader-1:before{
-  z-index: 100;
-  animation: spin 0.5s infinite;
-}
+        #loader-1:before {
+            z-index: 100;
+            animation: spin 0.5s infinite;
+        }
 
-#loader-1:after{
-  border: 3px solid #ccc;
-}
+        #loader-1:after {
+            border: 3px solid #ccc;
+        }
 
-@keyframes spin{
-  0%{
-    -webkit-transform: rotate(0deg);
-    -ms-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
+        @keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
 
-  100%{
-    -webkit-transform: rotate(360deg);
-    -ms-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
 
-.overlay {
-  height: 100%;
-  width: 100%;
-  display: none;
-  position: absolute;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0, 0.5); /* Black with a little bit see-through */
-}
-
+        .overlay {
+            height: 100%;
+            width: 100%;
+            display: none;
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black with a little bit see-through */
+        }
     </style>
 </head>
 
@@ -314,19 +317,15 @@
         <a href="/" class="btn w3-display-topleft w3-text-white w3-padding-large w3-xlarge">
             Momintum
         </a>
+
         <section id="form" class="w3-opacity-min">
-        <div id="myOverlay" class="overlay"></div>
+            <div id="myOverlay" class="overlay"></div>
 
             <div id="toggle-forms">
-                <!-- <div class="">
-                    <a href="{{ url('/') }}" class="w3-padding w3-large w3-blue-grey w3-margin-bottom w3-btn ">{{
-                        config('app.name', 'Laravel') }}</a>
-                </div> -->
                 <a href="login" class="btn waves-effect waves-light w3-large w3-padding active" id="login">Login</a>
                 <a href="register" class="btn waves-effect waves-light w3-large w3-padding " id="register">Register</a>
 
             </div>
-
 
             <form name="loginForm" method="POST" action="{{ route('login') }}" class="col s12 w3-text-white">
                 @csrf
@@ -336,7 +335,8 @@
                 </div>
 
                 <div class="row">
-                    <input id="email" name="email" type="email" class="" value="{{ old('email') }}" required>
+                    <input id="email" onblur="getMessage()" name="email" type="email" class=""
+                        value="{{ old('email') }}" required>
                     <label for="email">{{ __('E-Mail')}}</label>
                     @if ($errors->has('email'))
                     <div class="w3-text-red w3-padding-top">
@@ -363,7 +363,8 @@
 
                 <div class=" row " style="margin-top:25px">
 
-                    <button onclick="showLoader()" class="btn w3-button w3-blue-grey w3-padding w3-large waves-effect waves-light">
+                    <button onclick="showLoader()"
+                        class="btn w3-button w3-blue-grey w3-padding w3-large waves-effect waves-light">
                         Login
                     </button>
                     <span class="loader w3-right" id="loader-1"></span>
@@ -399,21 +400,21 @@
                     <h4 class="w3-text-white w3-large">New User Registertion</h4>
                 </div>
                 <div class="row" style="margin-top:25px">
-                    <input id="name " name="name" required type="name">
+                    <input name="name" required type="name">
                     <label for="name">Name</label>
                 </div>
                 <div class="row">
-                    <input id="email " name="email" required type="email">
+                    <input name="email" required type="email">
                     <label for="email">Email</label>
                 </div>
                 <div class="row">
-                    <input id="password" type="password" required>
+                    <input type="password" required>
                     <label for="password">Password</label>
 
                 </div>
 
                 <div class="row">
-                    <input id="confirmPassword" type="password" required>
+                    <input type="password" required>
                     <label for="confirmPassword">Confirm Password</label>
 
                 </div>
@@ -456,14 +457,13 @@
         function showLoader() {
             var email = document.forms["loginForm"]["email"].value;
             var password = document.forms["loginForm"]["password"].value;
-            if (email == "" || password =="" ){
+            if (email == "" || password == "") {
                 console.log('something is empty');
                 return false;
-            }            
-        document.getElementById("myOverlay").style.display = "block";
-        document.getElementById("loader-1").style.display = "block";
-}
-
+            }
+            document.getElementById("myOverlay").style.display = "block";
+            document.getElementById("loader-1").style.display = "block";
+        }
     </script>
 
 </body>

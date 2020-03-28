@@ -8,11 +8,10 @@
 <div class="w3-center    w3-panel w3-card">
 
 
-
   <div class='w3-content'>
     <div>
       <h1>Registration for Event: {{$event->name}}
-        <span class='w3-right w3-small'>Event Registration ID:{{ $eventregister['eventregister']->id }}</span>
+        <span class='w3-right w3-small'>Event Registration ID:{{ $eventregister['registration']->id }}</span>
       </h1>
     </div>
 
@@ -22,7 +21,7 @@
         <img src="https://www.w3schools.com/w3images/avatar2.png" class="w3-" style="height:100px;width:100px"
           alt="Avatar"><br><br>
 
-        Participant name: {{ $eventregister['eventregister']->name }}
+        Participant name: {{ $eventregister['registration']->name }}
       </div>
     </div>
 
@@ -44,11 +43,12 @@
     <div class="w3-row w3-section">
 
       <div class="w3-rest w3-card-4 w3-large w3-padding-large">Registration Status:
-        {!! $eventregister['eventregister']->status !!}
+        {!! $eventregister['registration']->status !!}
         <hr>
         @if($eventregister['showform'])
-        <form action="/eventregister/confirm/{{ $eventregister['eventregister']->id }}" method='post'>
+        <form action="/eventregister/updatestatus" method='POST'>
           @csrf
+          <input type="hidden" name="eventregister_id" value="{{ $eventregister['registration']->id}}">
           <div class='w3-medium w3-padding'>To confirm registration, please select from the options below:
             <div> <br>
               <input class="w3-radio" type="radio" name="status" required value="Confirmed: Pending payment online">
@@ -73,7 +73,7 @@
 
     <div class='w3-margin-top'>
       @if($eventregister['online'])
-      <button onclick="openModal()" class="w3-button    w3-blue-grey">Proceed to Payment</button>
+      <button onclick="openModal()" class="w3-button w3-blue-grey">Proceed to Payment</button>
       @endif
       <!--              START modal section -->
       <script>
@@ -109,7 +109,7 @@
 
 
       @if($eventregister['showDeleteForm'])
-      <form action="/eventregister/{{ $eventregister['eventregister']->id }}" method="POST">
+      <form action="/eventregister/{{ $eventregister['registration']->id }}" method="POST">
         @method('DELETE')
         @csrf
         <button class="w3-button w3-section w3-red w3-ripple"> Delete registration in {{$event->name}}?</button>

@@ -19,10 +19,13 @@ Auth::routes(['verify' => true]);
 
 /* Resources */
 Route::resource('photos', 'PhotoController');
-Route::resource('events', 'EventController')->middleware('verified');
+Route::resource('events', 'EventController');
 Route::resource('eventregister', 'EventRegisterController')->middleware('verified');
+Route::resource('programregister', 'ProgramRegisterController')->middleware('verified');
 Route::get('eventregister/create/{eventid}', 'EventRegisterController@create');
-Route::post('eventregister/confirm/{eventregister}', 'EventRegisterController@confirm');
+Route::post('eventregister/updatestatus', 'EventRegisterController@updateStatus');
+Route::get('programregister/create/{programid}', 'ProgramRegisterController@create');
+Route::post('programregister/updatestatus', 'ProgramRegisterController@updateStatus');
 
 /* PagesController */
 //Route::get('/', 'PagesController@mmain');
@@ -35,6 +38,7 @@ Route::get('/program/{programTitle}', 'PagesController@showprogram');
 Route::get('/mprofile', 'HomeController@mprofile');
 Route::get('admin/musers', 'HomeController@musers');
 Route::get('/test', 'HomeController@test');
+Route::get('/locationinfo', 'HomeController@locationinfo');
 Route::get('/home', 'HomeController@index')->name('home');
 
 /* ActivityReportController */
@@ -53,13 +57,13 @@ Route::get('/payment', 'PaymentController@index');
 Route::get('/payment/success', 'PaymentController@success');
 Route::post('/payment', 'PaymentController@store');
 Route::post('/payevent', 'PaymentController@payevent');
+Route::post('/payprogramregistration', 'PaymentController@payProgramRegistration');
 Route::get('/paytest', 'PaymentController@charge');
 Route::get('user/refund/{payment_intent}/{invoice_id}', 'PaymentController@refund');
 Route::delete('/payment', 'PaymentController@destroy');
 use Illuminate\Http\Request;
 
 Route::get('user/invoice/{invoice}/{event_name}', function (Request $request, $invoiceId, $event_name) {
-    //dd($request);
     return $request->user()->downloadInvoice($invoiceId, [
         'vendor' => 'Momintum',
         'product' => $event_name,
@@ -73,6 +77,10 @@ Route::post('/updateuser', 'UpdateUserController@store');
 Route::post('/enablestripe', 'EnableStripeController');
 
 /* Individual Routes */
+Route::get('/almasrepair', function () {
+    return view('almasrepair.home');
+});
+
 Route::get('/eia', function () {
     return view('eia.home');
 });
@@ -93,23 +101,11 @@ Route::get('/about', function () {
     return view('about');
 });
 
-Route::get('/radmap', function () {
-    return view('radmap');
-});
 Route::get('/mtest', function () {
     return view('momintum.mtest');
 });
 
-Route::get('/radmaptest', function () {
-    return view('radmaptest');
-});
-
-Route::get('/radmaplive', function () {
-    return view('radmaplive');
-});
-
-Route::get('/vendor/voyager/gravy', function () {
-    return view('/vendor/voyager/gravy');
-});
+ Route::post('/getmsg', 'AjaxController@index');
+ Route::get('/search', 'AjaxController@search');
 
 Auth::routes();

@@ -24,7 +24,7 @@ class EventRegisterController extends Controller
 
     public function index()
     {
-        $eventregisters = $this->EventRegister->getRegistrationStatus();
+        $eventregisters = $this->EventRegister->getEventRegistrationStatus();
         return view('eventregister.index', ['eventregisters' => $eventregisters]);
     }
 
@@ -74,7 +74,7 @@ class EventRegisterController extends Controller
     public function show(EventRegister $eventregister)
     {
         $eventregister = $this->EventRegister->showEventRegistration($eventregister);
-        $event = Event::find($eventregister['eventregister']->event_id);
+        $event = Event::find($eventregister['registration']->event_id);
         return view('eventregister.show', [
             'eventregister' => $eventregister,
             'event' => $event,
@@ -116,7 +116,19 @@ class EventRegisterController extends Controller
         return redirect('/eventregister');
     }
 
-    /**
+    //This method updates the event registration status
+    public function updateStatus(Request $request)
+    {
+        if ($this->EventRegister->requestStatusChecked($request)) {
+            $eventregister = EventRegister::findOrFail($request->eventregister_id);
+            $eventregister->status = $request->status;
+            $eventregister->save();
+            return redirect()->action('EventRegisterController@show', ['eventregister' => $eventregister]);
+        }
+    }
+
+
+        /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -125,42 +137,11 @@ class EventRegisterController extends Controller
     public function destroy(Request $request, $id)
     {
         $eventregister = EventRegister::findOrFail($id);
-
-//        event(new EventRegistrationDeleted($eventregister));
+//      event(new EventRegistrationDeleted($eventregister));
 
         $eventregister->delete();
 
         $request->session()->flash('Notice', 'Event Registration Deleted');
         return redirect('/eventregister');
-    }
-
-    //This method updates the event registration status
-    public function confirm(Request $request, EventRegister $eventregister)
-    {
-        if ($this->requestStatusChecked($request)) {
-            $eventregister->status = $request->status;
-            $eventregister->save();
-            $eventregister = $this->EventRegister->showEventRegistration($eventregister);
-            $event = Event::find($eventregister['eventregister']->event_id);
-
-            return view('eventregister.show', [
-                'eventregister' => $eventregister,
-                'event' => $event,
-            ]);
-        }
-    }
-
-
-/*     Check that the event status in the request is one of the valid acceptable options. */ 
-    public function requestStatusChecked(Request $request)
-    {
-        if ($request->status === 'New Registration Created' || $request->status === 'Confirmed: will pay in person' ||
-        $request->status === 'Cancelled' || $request->status === 'Paid Online' ||
-        $request->status === 'Confirmed: Pending payment online') {
-            return true;
-        } else {
-            $request->session()->flash('Notice', 'Please Select a Valid Event Status!');
-            return back();
-        }
     }
 }

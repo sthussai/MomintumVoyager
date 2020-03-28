@@ -35,4 +35,19 @@ class EventRegister extends Model
         $eventregister = $this->styleStatus($eventregister);
         return($eventregister);
     }   
+
+    
+/*     Check that the event status in the request is one of the valid acceptable options. */
+/*     validStatus() from the trait DisplayStatus. */
+      
+    public function requestStatusChecked($request)
+    {  
+        if ($this->validStatus($request)) {
+            return true;
+        } else {
+            $request->session()->flash('Notice', 'Please Select a Valid Event Status!');
+            return back();
+        }
+    }
+
 }

@@ -23,7 +23,7 @@ class Program extends Model
         return view('momintum.mmain', [
             'programs' => $programs,
             'posts' => $posts,
-            'hero_url' => 'https://www.w3schools.com/w3images/forestbridge.jpg',
+            'hero_url' => null,
         ]);
     }
 

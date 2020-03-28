@@ -9,6 +9,9 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
+        <!-- Stylesheets -->        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
 
         <!-- Scripts -->        
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -77,30 +80,30 @@
 .dot {
   width: 24px;
   height: 24px;
-  background: #3ac;
+  background: #FFDB05;
   border-radius: 100%;
   display: inline-block;
   animation: slide 1s infinite;
 }
 .dot:nth-child(1) {
   animation-delay: 0.1s;
-  background: #32aacc;
+  background: #007C41;
 }
 .dot:nth-child(2) {
   animation-delay: 0.2s;
-  background: #64aacc;
+  background: #FFDB05;
 }
 .dot:nth-child(3) {
   animation-delay: 0.3s;
-  background: #96aacc;
+  background: #007C41;
 }
 .dot:nth-child(4) {
   animation-delay: 0.4s;
-  background: #c8aacc;
+  background: #FFDB05;
 }
 .dot:nth-child(5) {
   animation-delay: 0.5s;
-  background: #faaacc;
+  background: #007C41;
 }
 @-moz-keyframes slide {
   0% {
@@ -173,6 +176,18 @@
                     @endauth
                 </div>
             @endif
+
+            <div style="border: solid 2px blue" class="loader">
+<!--               <div class="mx-auto text-center pb-4">Department of Radiology</div> -->          
+              <img src="storage/radlogo.svg" alt="Radiology logo" style="max-width: 500px; min-width: 350px" class="img-fluid">
+                  <div class="text-center">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                  </div>  
+                  
+            </div>
 
             <div class="content">
 

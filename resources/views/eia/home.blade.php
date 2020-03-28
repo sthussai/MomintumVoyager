@@ -121,14 +121,14 @@
 
   /* Second image (Portfolio) */
   .bgimg-2 {
-    background-image: url("http://hsigroup.online/images/eia/building.jpg");
+    background-image: url("https://www.w3schools.com/w3images/forestbridge.jpg");
     min-height: 400px;
 
   }
 
   /* Third image (Contact) */
   .bgimg-3 {
-    background-image: url('http://hsigroup.online/images/eia/mountains.jpg');
+    background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
     min-height: 400px;
   }
 
@@ -433,7 +433,7 @@
   <!-- START About Section -->
   <div class="w3-row w3-padding-64 w3-content" id="about">
     <div class="w3-col l6 w3-padding w3-center " style=''>
-      <img src="http://hsigroup.online/images/eia/graduation.jpg" class="w3-round img w3-image " alt="Table Setting">
+      <img src="https://www.w3schools.com/w3images/forestbridge.jpg" class="w3-round img w3-image " alt="Table Setting">
     </div>
     <br>
     <div class="w3-col l6 w3-padding">
@@ -456,7 +456,7 @@
 
   <div class='row '>
     <div class="col  w3-display-container">
-      <img src="http://hsigroup.online/images/eia/treelane.jpg" style='width:100%; height:100%' class=" w3-image "
+      <img src="https://www.w3schools.com/w3images/forestbridge.jpg" style='width:100%; height:100%' class=" w3-image "
         alt="Forest lane">
 
       <span style='width:100%' class='w3-display-topmiddle w3-padding-large w3-grey w3-center w3-opacity w3-round '>
@@ -480,7 +480,7 @@
           <button class='w3-button w3-dark-grey w3-round'>View More</button>
       </div>
 
-      <img id='imam_img' src="http://hsigroup.online/images/eia/eiaimam.jpg" class="w3-image " alt="Staff">
+      <img id='imam_img' src="https://www.w3schools.com/w3images/forestbridge.jpg" class="w3-image " alt="Staff">
 
     </div>
   </div>

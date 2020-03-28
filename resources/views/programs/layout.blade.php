@@ -14,7 +14,7 @@
 <!-- END Hero Image Div -->
 </div>
 @yield('content1')
-
+ 
 <!-- Posts -->
 <div class="w3-card w3-content w3-margin-top ">
     <div class="w3-container w3-padding ">

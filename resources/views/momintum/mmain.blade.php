@@ -10,8 +10,8 @@
 
   @foreach($programs as $program)
 
-  <!-- Section 1 of 3 -->
-  <div id='mainBlock' class=" w3-animate-zoom w3-col w3-center l4 m6 w3-margin-top ">
+  <!-- Section 1 of 6 -->
+  <div id='mainBlock' class="zoom w3-animate-zoom w3-col w3-center l4 m6 w3-margin-top ">
     <a href="/program/{{str_replace(' ', '_', $program->title)}}"
       class="w3-card w3-white w3-hover-opacity  w3-opacity-min w3-btn">
       <div class="w3-container w3-padding ">
@@ -38,7 +38,7 @@
 
     </a>
   </div>
-  <!-- END of section 1 0f 3 -->
+  <!-- END of section 1 0f 6 -->
   @endforeach
 
 

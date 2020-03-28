@@ -97,7 +97,8 @@
         }
 
         #form form input:focus {
-            border-bottom-color: dodgerblue !important
+            border-width: 5px;
+            border-color: dodgerblue !important;
         }
 
         #form .row>button {
@@ -244,6 +245,69 @@
             }
 
         }
+
+
+
+        .loader {
+            width: 20px;
+            height: 20px;
+            border-radius: 100%;
+            position: relative;
+            display: none;
+        }
+
+        /* LOADER 1 */
+
+        #loader-1:before,
+        #loader-1:after {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            border: 3px solid transparent;
+            border-top-color: #3498db;
+        }
+
+        #loader-1:before {
+            z-index: 100;
+            animation: spin 0.5s infinite;
+        }
+
+        #loader-1:after {
+            border: 3px solid #ccc;
+        }
+
+        @keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                -ms-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                -webkit-transform: rotate(360deg);
+                -ms-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        .overlay {
+            height: 100%;
+            width: 100%;
+            display: none;
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Black with a little bit see-through */
+        }
     </style>
 </head>
 
@@ -255,6 +319,7 @@
             Momintum
         </a>
         <section id="form" class="w3-opacity-min">
+            <div id="myOverlay" class="overlay"></div>
             <div id="toggle-forms">
                 <!--                 <div class="">
                     <a href="{{ url('/') }}" class="w3-padding w3-large w3-blue-grey w3-margin-bottom w3-btn ">{{
@@ -315,9 +380,9 @@
             </form>
 
 
-            <form method="POST" action="{{ route('register') }}" class="col w3-text-white s12">
+            <form name="registerForm" method="POST" action="{{ route('register') }}" class="col w3-text-white s12">
                 @csrf
-
+                <div id="myOverlay" class="overlay"></div>
                 <div class="row center-align">
                     <h4 class="w3-text-white w3-large">New User Registertion</h4>
                 </div>
@@ -340,7 +405,7 @@
                     @endif
                 </div>
                 <div class="row">
-                    <input id="password" type="password" name="password" required>
+                    <input type="password" name="password" required>
                     <label for="password">Password</label>
                     @if ($errors->has('password'))
                     <div class="w3-text-red w3-padding-top">
@@ -351,14 +416,16 @@
                 </div>
 
                 <div class="row">
-                    <input id="password-confirm" name="password_confirmation" type="password" required>
+                    <input name="password_confirmation" type="password" required>
                     <label for="password-confirm">Confirm Password</label>
 
                 </div>
                 <div class="row">
-                    <button class="btn w3-button w3-blue-grey w3-padding w3-large waves-effect waves-light">
+                    <button onclick="showLoader()"
+                        class="btn w3-button w3-blue-grey w3-padding w3-large waves-effect waves-light">
                         Register
                     </button>
+                    <span class="loader w3-right" id="loader-1"></span>
                 </div>
                 <ul class="animate">
                     <li></li>
@@ -378,9 +445,8 @@
 
     <script>
         function showRegisterFormFunction() {
-            console.log("Before!");
             document.getElementById("register").click();
-            console.log("Hello worlds!");
+
         }
 
 
@@ -399,14 +465,20 @@
         });
 
         showRegisterFormFunction();
+
+        function showLoader() {
+            var name = document.forms["registerForm"]["name"].value;
+            var email = document.forms["registerForm"]["email"].value;
+            var password = document.forms["registerForm"]["password"].value;
+            var passwordConfirm = document.forms["registerForm"]["password-confirm"].value;
+            if (name == "" || email == "" || password == "" || passwordConfirm == "") {
+                console.log('something is empty');
+                return false;
+            }
+            document.getElementById("myOverlay").style.display = "block";
+            document.getElementById("loader-1").style.display = "block";
+        }
     </script>
 
 
-    @if(url('/login'))
-
-    <script>
-        console.log('route is login')
-    </script>
-
-    @endif
 </body>

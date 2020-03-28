@@ -70,126 +70,127 @@
 
 
 
-  </div>
-  <!-- END Account Billing Info Section -->
+
+    <!-- END Account Billing Info Section -->
 
 
 
-  <h3>Payment Methods on File<a href="/addpaymentmethod"
-      class=' w3-right w3-button w3-small  w3-border w3-border-black w3-ripple'>Add Card</a>
-  </h3>
+    <h3>Payment Methods on File<a href="/addpaymentmethod"
+        class=' w3-right w3-button w3-small  w3-border w3-border-black w3-ripple'>Add Card</a>
+    </h3>
 
-  <div class='w3-responsive'>
-    <table class="w3-table-all w3-hoverable ">
-      <thead>
-        <tr class="w3-blue-grey">
+    <div class='w3-responsive'>
+      <table class="w3-table-all w3-hoverable ">
+        <thead>
+          <tr class="w3-blue-grey">
 
-          <th>Card</th>
-          <th>Last 4 digits</th>
-          <th>Name on Card</th>
-          <th>Action</th>
+            <th>Card</th>
+            <th>Last 4 digits</th>
+            <th>Name on Card</th>
+            <th>Action</th>
 
+          </tr>
+        </thead>
+        @if(@isset($cardonfile))
+
+        @foreach ($paymentMethods as $paymentMethod)
+        <tr>
+
+          <td>{{ $paymentMethod->card->brand }}</td>
+          <td>{{ $paymentMethod->card->last4 }}</td>
+          <td>{{ $paymentMethod->billing_details->name }}</td>
+
+          @if($paymentMethod->id === $defaultPaymentMethod->id)
+          <td>Default Payment Method</td>
+          @else
+          <td>
+            <form method='get' action="/deletePaymentMethod/{{ $paymentMethod->id }}">
+
+              <button class='w3-btn w3-pale-red'>Delete Payment Method</button>
+            </form>
+          </td>
+          @endif
         </tr>
-      </thead>
-      @if(@isset($cardonfile))
-
-      @foreach ($paymentMethods as $paymentMethod)
-      <tr>
-
-        <td>{{ $paymentMethod->card->brand }}</td>
-        <td>{{ $paymentMethod->card->last4 }}</td>
-        <td>{{ $paymentMethod->billing_details->name }}</td>
-
-        @if($paymentMethod->id === $defaultPaymentMethod->id)
-        <td>Default Payment Method</td>
+        @endforeach
         @else
-        <td>
-          <form method='get' action="/deletePaymentMethod/{{ $paymentMethod->id }}">
+        <tr>
+          <td>No Card on file</td>
+          <td>
 
-            <button class='w3-btn w3-pale-red'>Delete Payment Method</button>
-          </form>
-        </td>
-        @endif
-      </tr>
-      @endforeach
-      @else
-      <tr>
-        <td>No Card on file</td>
-        <td>
+            <a href='/addpaymentmethod' class='w3-btn w3-pale-green'>Add Card?</a>
 
-          <a href='/addpaymentmethod' class='w3-btn w3-pale-green'>Add Card?</a>
-
-        </td>
-
-      </tr>
-
-      @endif
-
-    </table>
-
-  </div>
-
-  <form method='get' action="/paytest">
-
-    <button class='w3-btn w3-pale-red'>Pay One Time Invoice (Test)</button>
-
-  </form>
-
-
-
-  <!-- Start Invoices Section -->
-  <div class='w3-responsive w3-padding-16'>
-    <h3>View All Invoices</h3>
-    <table class="w3-table-all w3-hoverable ">
-      <thead>
-        <tr class="w3-blue-grey">
-
-          <th>Date</th>
-          <th>Amount</th>
-          <th>Customer</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Invoice</th>
+          </td>
 
         </tr>
-      </thead>
-      @foreach ($invoices as $invoice)
-      <tr>
-        <td>{{$invoice->date()->toFormattedDateString()}}</td>
-        <td>{{$invoice->total()}}</td>
-        <td>{{$invoice->customer_email}}</td>
-        <td>{{$invoice->description}}</td>
-        <td>{{$invoice->status}}</td>
 
-        <td><a href="/user/invoice/{{ $invoice->id }}/{{$invoice->description}}"
-            class='w3-blue-grey w3-padding'>Download</a></td>
+        @endif
+
+      </table>
+
+    </div>
+
+    <form method='get' action="/paytest">
+
+      <button class='w3-btn w3-pale-red'>Pay One Time Invoice (Test)</button>
+
+    </form>
 
 
 
-      </tr>
-      @endforeach
-      <tr>
-    </table>
+    <!-- Start Invoices Section -->
+    <div class='w3-responsive w3-padding-16'>
+      <h3>View All Invoices</h3>
+      <table class="w3-table-all w3-hoverable ">
+        <thead>
+          <tr class="w3-blue-grey">
+
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Customer</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Invoice</th>
+
+          </tr>
+        </thead>
+        @foreach ($invoices as $invoice)
+        <tr>
+          <td>{{$invoice->date()->toFormattedDateString()}}</td>
+          <td>{{$invoice->total()}}</td>
+          <td>{{$invoice->customer_email}}</td>
+          <td>{{$invoice->description}}</td>
+          <td>{{$invoice->status}}</td>
+
+          <td><a href="/user/invoice/{{ $invoice->id }}/{{$invoice->description}}"
+              class='w3-blue-grey w3-padding'>Download</a></td>
+
+
+
+        </tr>
+        @endforeach
+        <tr>
+      </table>
+
+    </div>
+    <!-- END Invoices Section -->
+
+
+
+
+
+
+
 
   </div>
-  <!-- END Invoices Section -->
 
 
 
 
 
+  @endif
 
 
 
-</div>
-
-
-
-
-
-@endif
-
-
-
-
-@endsection
+  </div>
+  
+  @endsection

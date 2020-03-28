@@ -21,20 +21,32 @@ class EventController extends Controller
      */
     public function index()
     {
-        return $this->event->getAllEvents();
+        $events = $this->event->getAllEvents(); 
+        return view('events.index', [
+            'events' => $events]);
     }
 
    
 
     /**
-     * Display the specified resource.
+     * Display the specified resource by returning a Collection from the Model.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($eventName)
-    {
-        return $this->event->showEvent($eventName);
+    {   
+
+        $event = $this->event->showEvent($eventName)['event']; 
+        $eventregisters = $this->event->showEvent($eventName)['eventregisters']; 
+        $nextEvent = $this->event->showEvent($eventName)['nextEvent']; 
+        $previousEvent = $this->event->showEvent($eventName)['previousEvent']; 
+
+        return view('events.show', [
+            'event' => $event,
+            'eventregisters' => $eventregisters,
+            'nextEvent' => $nextEvent,
+            'previousEvent' => $previousEvent]);
     }
 
     /**

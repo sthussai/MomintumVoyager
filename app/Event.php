@@ -27,7 +27,7 @@ class Event extends Model
     public function getAllEvents()
     {
         $events = Event::all();
-        return view('events.index', ['events' => $events]);
+        return ($events);
     }
 
     public function showEvent($eventName)
@@ -42,10 +42,10 @@ class Event extends Model
 
         $eventregisters = EventRegister::where('event_id', $event->id)->get();
 
-        return view('events.show', [
-            'event' => $event,
-            'eventregisters' => $eventregisters,
-            'nextEvent' => $nextEvent,
-            'previousEvent' => $previousEvent]);
+     return collect( [
+        'event' => $event,
+        'eventregisters' => $eventregisters,
+        'nextEvent' => $nextEvent,
+        'previousEvent' => $previousEvent]);
     }
 }
