@@ -138,7 +138,6 @@
             flex-direction: column;
         }
 
-        .col {}
 
 
     }
@@ -182,9 +181,6 @@
         .row1 {
             flex-direction: column;
         }
-
-        .col1 {}
-
     }
 
     /*END Display at SMALL width */
@@ -408,7 +404,7 @@
 
 
 
-    <div class="w3-container  col m6 s12 w3-padding-32 w3-red w3-card-4" style="">
+    <div class="w3-container  col m6 s12 w3-padding-32 w3-red w3-card-4">
         <div class="w3-content w3-center">
             <h2>Book a repair with us today!</h2>
             <h3>Let us come to you.</h3>
@@ -453,7 +449,6 @@
     <!-- include('eia.sections.footer') -->
 
     <!-- END Footer -->
-
 
 
 
