@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use App\User;
 use App\EventRegister;
+use App\ProgramRegister;
 use App\Events\PaymentSubmitted;
 use App\Notifications\PaymentReceived;
-use Illuminate\Support\Collection;
 
 class PaymentController extends Controller
 {
@@ -21,7 +21,7 @@ class PaymentController extends Controller
 
     public function index(Request $request)
     {
-        session(['Event' => 'Successful Event Noted']);
+//        session(['Event' => 'Processing Payments Through Stripe']);
 
         $user = Auth::user();
 
@@ -109,9 +109,6 @@ class PaymentController extends Controller
     public function charge(Request $request)
     {
         $user = auth()->user();
-        //dd($request);
-        //$paymentMethod ='pm_1FwjYmBGJ32CkWyoT09EC5Mi';
-        //$stripeCharge = $user->charge(100, $paymentMethod);
         $user->invoiceFor(
             'One Time Fee',
             400,
@@ -151,6 +148,28 @@ class PaymentController extends Controller
             return redirect('payment')->with('status', 'Paid Event Registration Fee Successfully!');
         } else {
             return redirect('payment')->with('status', 'No Payment Method on File');
+            ;
+        }
+    }
+
+    //Pay Program registration fee using default payment method and start subscription
+    public function payProgramRegistration(Request $request)
+    {
+        $user = auth()->user();
+        $programregister = ProgramRegister::findOrFail(request()->programregister_id);
+
+        if ($user->hasPaymentMethod()) {
+            $paymentMethod = $user->defaultPaymentMethod();
+            $paymentMethod = $paymentMethod->paymentMethod;
+            $user->newSubscription($programregister->program_name, 'plan_F2o7YTBFofu0mH')->create($paymentMethod);
+            $programregister->status = 'Paid Online';
+            $programregister->save();
+
+//            Notification::send(request()->user(), new PaymentReceived());
+
+            return redirect('payment')->with('status', 'Successfully Subscribed to ' . $programregister->program_name);
+        } else {
+            return redirect('payment')->with('status', 'No Payment Method on File. Please Add A Payment Method');
             ;
         }
     }

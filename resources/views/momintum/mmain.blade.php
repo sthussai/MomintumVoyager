@@ -3,40 +3,42 @@
 @section("content")
 
 
+
 <!-- Main Page Blocks section -->
 
 <div class="w3-row-padding w3-margin-top">
 
   @foreach($programs as $program)
 
-  <!-- Section 1 of 3 -->
-  <div id='mainBlock' class=" w3-animate-zoom w3-col w3-center l4 m6 w3-margin-top">
-    <a href="/program/{{$program->id}}" class="w3-card  w3-btn">
-      <div class="w3-container w3-padding  w3-light-grey">
-        <h3>{{$program->title}}</h3>
+  <!-- Section 1 of 6 -->
+  <div id='mainBlock' class="zoom w3-animate-zoom w3-col w3-center l4 m6 w3-margin-top ">
+    <a href="/program/{{str_replace(' ', '_', $program->title)}}"
+      class="w3-card w3-white w3-hover-opacity  w3-opacity-min w3-btn">
+      <div class="w3-container w3-padding ">
+        <p class="w3-large">{{$program->title}}</p>
       </div>
 
       <!-- Start Flex container - 2 divs side by side -->
       <div style="display:flex; align-items: center; solid 2px blue">
 
-        <img class='w3-image' src="{{$program->url}}" style="width:50%;solid 2px red;min-height:150px;">
+        <img class='w3-image' src="{{url('/storage/'.$program->url)}}" style="width:50%;">
 
 
         <div style='width:50%;  solid 2px red;'>
-          <h4>{{$program->subheading}}</h4>
-          <h4>5 Terre d</h4>
+          <p class="w3-medium">{{$program->subheading}}</p>
+          <p class="w3-medium">{{$program->subheading}}</p>
         </div>
       </div>
       <!-- END Flex container - 2 divs side by side -->
 
       <div class="w3-container w3-dark-grey" style='margin-top:5px'>
-        <p>{{$program->description}}</p>
-        <p>Lorem ipsum dolor sit amet.</p>
+        <p class="w3-small">{{$program->description}}</p>
+        <p class="w3-small">Lorem ipsum dolor sit amet.</p>
       </div>
 
     </a>
   </div>
-  <!-- END of section 1 0f 3 -->
+  <!-- END of section 1 0f 6 -->
   @endforeach
 
 
@@ -45,6 +47,8 @@
 </div>
 
 
+<!--  End of HERO Image div  -->
+</div>
 
 <!-- Menu Article Section Container -->
 <div class="w3-container w3-padding-64 w3-large" id="menu">
@@ -68,8 +72,7 @@
       <!-- Start Article Section 1 of 3 -->
       <div class='w3-row-padding w3-content w3-large' style="solid 2px blue">
         <div class='w3-mobile w3-col l4 m5 s12' style="solid 2px red">
-          <img class='w3-image' src="http://localhost:8000/storage/{{$post->image}}"
-            style="max-height:250px;solid 2px red">
+          <img class='w3-image' src="{{url('/storage/'.$post->image)}}" style="max-height:250px;solid 2px red">
         </div>
         <div class='w3-mobile w3-col l8 m7 s12' style="margin-top:10px; solid 2px red;">
           <h3><b>{{$post->title}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">New</span></h3>
@@ -92,8 +95,7 @@
       <!-- Start Article Section 1 of 3 -->
       <div class='w3-row-padding w3-content w3-large' style="solid 2px blue">
         <div class='w3-mobile w3-col l4 m5 s12' style="solid 2px red">
-          <img class='w3-image' src="http://localhost:8000/storage/{{$post->image}}"
-            style="max-height:250px;solid 2px red">
+          <img class='w3-image' src="{{url('/storage/'.$post->image)}}" style="max-height:250px;solid 2px red">
         </div>
         <div class='w3-mobile w3-col l8 m7 s12' style="margin-top:10px; solid 2px red;">
           <h3><b>{{$post->title}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">New</span></h3>

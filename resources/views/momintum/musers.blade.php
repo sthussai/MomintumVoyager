@@ -2,7 +2,8 @@
 
 @section('content')
 
-
+<!-- END Hero Image div -->
+</div>
 
 <div class='w3-container  '>
 <h1> Momintum Users</h1>

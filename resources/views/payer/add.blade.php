@@ -22,7 +22,7 @@
     <input id="card-holder-address" class="w3-input w3-border" name="name" type="text" placeholder="Address" @isset($customer->address->line1) value="{{$customer->address->line1}}" @endisset>
     <input id="card-holder-city" class="w3-input w3-border " name="city" type="text" placeholder="City" @isset($customer->address->city) value="{{$customer->address->city}}" @endisset>
     <input id="card-holder-state" class="w3-input w3-border " name="state" type="text" placeholder="Province" @isset($customer->address->state) value="{{$customer->address->state}}" @endisset>
-    <div id="card-element" class='w3-padding-large w3-border w3-light-grey w3-black'>
+    <div id="card-element" class='w3-padding-large w3-input w3-border w3-light-grey w3-black'>
       <!-- A Stripe Element will be inserted here. -->
     </div>
 

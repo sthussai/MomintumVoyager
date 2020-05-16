@@ -41,7 +41,7 @@ class PaymentReceived extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Event Payment Received')
+                    ->subject('Payment Received')
                     ->greeting('Salams')
                     ->line('A payment was just submitted from your account.')
                     ->line('If this was you, nothing further needs to be done.')

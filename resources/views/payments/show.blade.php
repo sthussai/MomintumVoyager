@@ -1,46 +1,83 @@
-@extends('layouts.momintum')  
+@extends('payments.layout')
+
+@section('content1')
+
+<!-- Start Refunds section -->
+<!-- <div class='w3-responsive w3-padding-16' >                              
+            <h3>View Refunds</h3>
+                                                      <table  class="w3-table-all w3-hoverable ">
+                                                        <thead>
+                                                          <tr class="w3-blue-grey">
+                                                            
+                                                            <th>Payment Intent ID</th>
+                                                            <th>Charge ID</th>
+                                                            <th>Refund Amount</th>
+                                                            <th>Customer</th>
 
 
-@section('content')
+                                                     
+                                                          </tr>
+                                                        </thead>  
+                                                        @foreach ($refunds as $refund)
+                                                        <tr>
+                                                          <td>{{$refund->payment_intent}}</td>
+                                                          <td>{{$refund->charge}}</td>
+                                                          <td>{{$refund->amount}}</td>
+                                                          <td>{{$refund->charge}}</td>
+                                                                
+                                                        </tr>
+                                                        @endforeach
+                                                        <tr>
+                                                      </table>
+    
+        </div> -->
+<!-- END Refunds section -->
 
-<div class="w3-center    w3-panel w3-card">
-                <div class="links w3-center w3-large w3-bar w3-padding-large">
-                    <a class="w3-btn" href="/events">Home</a>           
-                    <a class="w3-btn " href="/events/create">Create New Event</a>
 
-                </div>
-<div>
-	<div>
-<h1>Show Event
-</h1></div>
 
-<div class="w3-row w3-section">
-  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
-    <div class="w3-rest">
-      {{ $event->name }}
-    </div>
-</div>
 
-<div class="w3-row w3-section">
-  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-user"></i></div>
-    <div class="w3-rest">
-      {{ $event->description }}
-    </div>
-</div>
+<!-- Start Charges Section -->
+<!--         <div class='w3-responsive w3-padding-16' >                              
+          <h3>View All Charges</h3>
+                                                      <table  class="w3-table-all w3-hoverable ">
+                                                        <thead>
+                                                          <tr class="w3-blue-grey">
+                                                            
+                                                            <th>Date</th>
+                                                            <th>Amount</th>
+                                                            <th>Customer</th>
+                                                            <th>Description</th>
+                                                            <th>Status</th>
+                                                            <th>Invoice</th>
+                                                            <th>Action</th>
+                                                          </tr>
+                                                        </thead>
+                                                        foreach ($charges as $charge)
+                                                        <tr>
+                                                          <td>{{$charge->created}}</td>
+                                                          <td>{{$charge->amount}}</td>
+                                                          <td>{{$charge->customer}}</td>
+                                                          <td>{{$charge->description}}</td>
+                                                          <td>{{$charge->payment_intent}}</td>
+                                                          <td>{{$charge->status}}</td>
 
-<div class="w3-row w3-section">
-  <div class="w3-col" style="width:50px"><i class="w3-xxlarge fa fa-envelope-o"></i></div>
-    <div class="w3-rest">
-      {{ $event->url }}
-    </div>
-</div>
-<figure >
-  <img class="w3-image" src="{{$event->url}}">
-</figure>
-<a  href="/events/{{$previousID}}" class="w3-button    w3-blue-grey">Previous</a>
-<a  href="/events/{{$event->id}}/edit" class="w3-button w3-green">Edit</a>
-<a  href="/eventregister/{{$event->id}}" class="w3-button w3-green">Register</a>
-<a  href="/events/{{$nextID}}" class="w3-button w3-blue-grey">Next</a>
-<div class='w3-margin-top'><a  href="/events" class="w3-button w3-light-grey">Home</a></div>
-</div>
+                                  
+                                                  
+                                                          <td>
+                                                          <form method='get' action="/user/refund/{{ $charge->payment_intent }}/{{$charge->id}}">
+                                                          @csrf
+                                                          <button class='w3-btn w3-pale-red'>Cancel</button>
+                                                          </form>
+                                                          </td>
+                                                      
+                                                                
+                                                        </tr>
+                                                        endforeach
+                                                        <tr>
+                                                      </table>
+    
+        </div> -->
+<!-- END Charges Section -->
+
+
 @endsection

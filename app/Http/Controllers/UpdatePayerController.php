@@ -39,7 +39,7 @@ class UpdatePayerController extends Controller
         return redirect('payment')->with('status', 'Billing Information Updated Successfully!');
     }
 
-    //Form to Add new payment methos
+    //Form to Add new payment methods
     public function add()
     {
         $user = auth()->user();

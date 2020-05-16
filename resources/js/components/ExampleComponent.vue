@@ -6,18 +6,34 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        I'm an example component. Test Tage
                     </div>
+                
+  
+                
+                
                 </div>
             </div>
         </div>
     </div>
 </template>
 
+
+
+
 <script>
     export default {
         mounted() {
             console.log('Component mounted.')
-        }
+        },
+        created(){
+            Echo.channel('location')
+            .listen('SendPosition',(e)=>{
+                console.log(e);
+            });
+        },
+        
     }
 </script>
+
+

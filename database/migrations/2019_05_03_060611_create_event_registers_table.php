@@ -17,6 +17,7 @@ class CreateEventRegistersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('owner_id');
             $table->unsignedBigInteger('event_id');
+            $table->unique(['owner_id', 'event_id']);
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
@@ -24,11 +25,9 @@ class CreateEventRegistersTable extends Migration
             $table->string('event_name')->nullable();
 
             $table->timestamps();
-        
-        
+
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
-        
         });
     }
 

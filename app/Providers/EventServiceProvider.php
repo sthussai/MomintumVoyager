@@ -21,8 +21,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\EventRegistrationDeleted' => [
             'App\Listeners\ListenEventRegistrationDeleted',
         ],
-        'App\Events\ActivityLogged' => [
-            'App\Listeners\ActivityLogged',
+        'Illuminate\Auth\Events\Login' => ['App\Listeners\LoginSuccessfulListener'
+        ],
+        'Illuminate\Auth\Events\Logout' => ['App\Listeners\LogoutSuccessfulListener'
         ],
         'App\Events\UserRegistered' => [
             'App\Listeners\SendWelcomeEmail',
