@@ -30,7 +30,9 @@ class AjaxController extends Controller
     
                 $total_row = $events->count();
                 dump('Events Found: '.$total_row);
-        if($total_row == 0){$output = 'No Events Found<br><br><a href="/events" class=" w3-blue-grey w3-button">View All Events</a>';}
+        if($total_row == 0){
+            $output = 'No Events Found<br><br><a href="/events" class=" w3-blue-grey w3-button">View All Events</a>';
+        }
                 else {
                     foreach ($events as $event) {
                         $event->link = str_replace(' ', '_', $event->name);

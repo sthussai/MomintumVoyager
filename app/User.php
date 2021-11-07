@@ -6,11 +6,15 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Cashier\Billable;
+use Cache;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\Traits\CausesActivity;
 
 class User extends \TCG\Voyager\Models\User
 {
     use Notifiable;
     use Billable;
+    use LogsActivity, CausesActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +26,8 @@ class User extends \TCG\Voyager\Models\User
         'last_login_at',
         'last_login_ip',
     ];
+
+    protected static $logFillable = true;
 
     /**
      * The attributes that should be hidden for arrays.
@@ -51,5 +57,10 @@ class User extends \TCG\Voyager\Models\User
     public function eventregisters()
     {
         return $this->hasMany('App\EventRegister', 'owner_id');
+    }
+
+    public function isOnline()
+    {
+        return Cache::has('user-is-online-' . $this->id);
     }
 }

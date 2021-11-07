@@ -15,7 +15,7 @@
         <img id='imam_img' src="http://hsigroup.online/images/eia/schoolkids.jpg" style='max-height:400px' class="w3-image w3-col w3-padding m6" alt="Staff" >
         </div>
       </div>
-
+ 
       <div id="Admissions" class="menuContent w3-content w3-row">
             <h3>Admissions</h3>
             <div class=" w3-small w3-text-grey" style="">

@@ -7,10 +7,11 @@ use App\Traits\DisplayStatus;
 use App\Events\EventRegistrationCreated;
 use App\Events\EventRegistrationDeleted;
 use Illuminate\Database\QueryException;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class EventRegister extends Model
 {
-    use DisplayStatus;
+    use DisplayStatus, LogsActivity;
 
     public function createNewEventRegistration($array)
     {

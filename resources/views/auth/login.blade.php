@@ -335,7 +335,7 @@
                 </div>
 
                 <div class="row">
-                    <input id="email" onblur="getMessage()" name="email" type="email" class=""
+                    <input id="email" name="email" type="email" class=""
                         value="{{ old('email') }}" required>
                     <label for="email">{{ __('E-Mail')}}</label>
                     @if ($errors->has('email'))

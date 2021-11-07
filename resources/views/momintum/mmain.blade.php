@@ -3,7 +3,6 @@
 @section("content")
 
 
-
 <!-- Main Page Blocks section -->
 
 <div class="w3-row-padding w3-margin-top">
@@ -19,12 +18,12 @@
       </div>
 
       <!-- Start Flex container - 2 divs side by side -->
-      <div style="display:flex; align-items: center; solid 2px blue">
+      <div style="display:flex; align-items: center;">
 
         <img class='w3-image' src="{{url('/storage/'.$program->url)}}" style="width:50%;">
 
 
-        <div style='width:50%;  solid 2px red;'>
+        <div style='width:50%; '>
           <p class="w3-medium">{{$program->subheading}}</p>
           <p class="w3-medium">{{$program->subheading}}</p>
         </div>
@@ -65,16 +64,16 @@
 
     </div>
 
-    <div id="Upcoming" style="solid 2px red" class="w3-container menu w3-padding-32 w3-white ">
+    <div id="Upcoming" class="w3-container menu w3-padding-32 w3-white ">
 
       @foreach($posts as $post)
       @if($post->featured)
       <!-- Start Article Section 1 of 3 -->
-      <div class='w3-row-padding w3-content w3-large' style="solid 2px blue">
-        <div class='w3-mobile w3-col l4 m5 s12' style="solid 2px red">
-          <img class='w3-image' src="{{url('/storage/'.$post->image)}}" style="max-height:250px;solid 2px red">
+      <div id="posts" class='w3-row-padding w3-content w3-large'>
+        <div class='w3-mobile w3-col l4 m5 s12'>
+          <img class='w3-image' src="{{url('/storage/'.$post->image)}}" style="max-height:250px;">
         </div>
-        <div class='w3-mobile w3-col l8 m7 s12' style="margin-top:10px; solid 2px red;">
+        <div class='w3-mobile w3-col l8 m7 s12' style="margin-top:10px; ;">
           <h3><b>{{$post->title}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">New</span></h3>
           <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</p>
@@ -93,11 +92,11 @@
       @foreach($posts as $post)
       @if(!$post->featured)
       <!-- Start Article Section 1 of 3 -->
-      <div class='w3-row-padding w3-content w3-large' style="solid 2px blue">
-        <div class='w3-mobile w3-col l4 m5 s12' style="solid 2px red">
-          <img class='w3-image' src="{{url('/storage/'.$post->image)}}" style="max-height:250px;solid 2px red">
+      <div class='w3-row-padding w3-content w3-large'>
+        <div class='w3-mobile w3-col l4 m5 s12'>
+          <img class='w3-image' src="{{url('/storage/'.$post->image)}}" style="max-height:250px;">
         </div>
-        <div class='w3-mobile w3-col l8 m7 s12' style="margin-top:10px; solid 2px red;">
+        <div class='w3-mobile w3-col l8 m7 s12' style="margin-top:10px; ;">
           <h3><b>{{$post->title}}</b> <span class="w3-right w3-tag w3-dark-grey w3-round">New</span></h3>
           <p class="w3-text-grey">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
             incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis</p>
