@@ -1554,7 +1554,7 @@
                 "ext-openssl": "*",
                 "league/commonmark": "^1.1",
                 "league/commonmark-ext-table": "^2.1",
-                "league/flysystem": "^1.0.8",
+                "league/flysystem": "^1.1.4",
                 "monolog/monolog": "^1.12|^2.0",
                 "nesbot/carbon": "^2.0",
                 "opis/closure": "^3.1",
@@ -4709,7 +4709,7 @@
                 "intervention/image": "^2.4",
                 "larapack/doctrine-support": "~0.1.4",
                 "larapack/voyager-hooks": "~1.2.1",
-                "league/flysystem": "~1.0.41"
+              
             },
             "require-dev": {
                 "laravel/browser-kit-testing": "~2.0.0|~3.0.0|~4.0.0|~5.0.0|~5.1",
