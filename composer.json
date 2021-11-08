@@ -13,6 +13,8 @@
         "laravel/cashier": "^12.0",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
+        "spatie/laravel-activitylog": "^3.17",
+        "stevebauman/location": "^6.2",
         "tcg/voyager": "1.5.*"
     },
     "require-dev": {
