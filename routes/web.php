@@ -36,13 +36,16 @@ Route::get('/program/{programTitle}', 'PagesController@showprogram');
 
 /* HomeController */
 Route::get('/mprofile', 'HomeController@mprofile');
-Route::get('admin/musers', 'HomeController@musers');
+Route::get('/musers', 'HomeController@musers');
 Route::get('/test', 'HomeController@test');
 Route::get('/locationinfo', 'HomeController@locationinfo');
 Route::get('/home', 'HomeController@index')->name('home');
 
 /* ActivityReportController */
 Route::post('/activityreport', 'ActivityReportController@store');
+
+/* LogsActivitiesController */
+Route::get('/activitieslog', 'LogsActivitiesController@index');
 
 /* UpdatePayerController */
 Route::get('/addpaymentmethod', 'UpdatePayerController@add');

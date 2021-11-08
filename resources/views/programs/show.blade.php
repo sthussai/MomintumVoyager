@@ -42,10 +42,6 @@
 
 
   }
-
-
-
-  }
 </style>
 
 <div class="w3-center" style="margin:20px 0 0;">
@@ -66,12 +62,14 @@
           </span>
 
           <span class='w3-display-bottommiddle w3-padding-large  w3-center  w3-round '>
+            @auth
             @if (auth()->user()->subscribed($program->name))
             <div title="Thanks! You've subscribed to {{$program->name}}"
               class="w3-padding w3-green w3-large w3-margin-bottom">Subscribed!</div>
             @else <a href="/programregister/create/{{$program->id}}"
               class="w3-button w3-opacity-min w3-large w3-white w3-margin-bottom">Register</a>
             @endif
+            @endauth
           </span>
         </div>
 

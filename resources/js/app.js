@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-//window.Vue = require('vue');
+window.Vue = require('vue');
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,6 +20,7 @@ require('./bootstrap');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('auto-logout', require('./components/AutoLogout.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -28,5 +29,26 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  */
 
 /* const app = new Vue({
-    el: '#app',
+    el: '#vue',
 }); */
+
+Vue.component('button-counter', {
+    data: function () {
+      return {
+        count: 0
+      }
+    },
+    template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+  })
+
+
+  Vue.component('modal', {
+    data: function () {
+      return {
+        showModal: false
+      }
+    },
+    template: '<div class="w3-modal-content w3-animate-top w3-card-4"><header class="w3-container w3-blue-grey"><h2 class="w3-padding">Update User Information</h2></header></div>'
+  });
+
+  new Vue({ el: '#vue' })

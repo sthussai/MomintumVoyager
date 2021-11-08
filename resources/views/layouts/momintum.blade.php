@@ -3,10 +3,12 @@
 <html>
 
 <head>
-  <title>Profile</title>
+  <title>Momintum</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="_token" content="{{ csrf_token() }}">
+  
+<!-- CSRF Token -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
@@ -127,7 +129,7 @@
         title="Resturants"><i class="fa fa-photo"></i></a>
       <a href="{{ url('/events') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Events"><i class="fa fa-star"></i></a>
-      <a href="{{ url('admin/musers') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+      <a href="{{ url('/musers') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Users"><i class="fa fa-user"></i></a>
       <a href="{{ url('/test') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Admin Mode"><i class="fa fa-adn"></i></a>
@@ -282,7 +284,8 @@
         <span class="w3-bar-item w3-right w3-hide-small">/</span>
         <!--  START Top Right Registation dropdown -->
         <div class="w3-dropdown-hover w3-right w3-hide-small">
-          <button class="w3-bar-item w3-right w3-button w3-large w3-hide-small" title="Registrations">Registrations</button>
+          <button class="w3-bar-item w3-right w3-button w3-large w3-hide-small"
+            title="Registrations">Registrations</button>
           <div class="w3-dropdown-content w3-card-4 w3-bar-block w3-small" style="width:150px; margin-top:45px">
             <a href="/programregister" class="w3-bar-item w3-right w3-button w3-small w3-hide-small">Program
               Registrations</a>

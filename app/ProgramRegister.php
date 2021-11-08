@@ -5,10 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Traits\DisplayStatus;
 use Illuminate\Database\QueryException;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class ProgramRegister extends Model
 {
-    use DisplayStatus;
+    use DisplayStatus, LogsActivity;
 
     public function createNewProgramRegistration($array)
     {

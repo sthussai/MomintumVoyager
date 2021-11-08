@@ -18,7 +18,7 @@
 
   <!-- All events half div and my registrations section-->
 
-  <div class="w3-col l6 m12 s12 w3-container w3-card w3-white w3-margin-bottom w3-center" style=" ">
+  <div class="w3-col l6 m12 s12 w3-container w3-card w3-white w3-margin-bottom w3-center">
 
 
     <!-- START My Registration Section -->
@@ -66,18 +66,18 @@
       <!-- Section 1 of 3 -->
 
       <a href="/events/{{str_replace(' ', '_',$event->name)}}" class="w3-col w3-center l6 m6 w3-margin-top "
-        style="solid 2px red ">
-        <div class="w3-container w3-card  w3-padding w3-btn w3-block" style="solid 2px blue">
+        >
+        <div class="w3-container w3-card  w3-padding w3-btn w3-block">
           <h3>{{$event->name}}</h3>
 
 
           <!-- Start Flex container - 2 divs side by side -->
-          <div style="display:flex; align-items: center;  solid 2px blue">
+          <div style="display:flex; align-items: center;">
 
-            <img class='w3-image' src="{{$event->url}}" style="width:50%; solid 2px red;">
+            <img class='w3-image' src="{{$event->url}}" style="width:50%;">
 
 
-            <div style='width:50%;  solid 2px red;'>
+            <div style='width:50%;  ;'>
               <h4>5 Terre d</h4>
               <h4>5 Terre d</h4>
             </div>
@@ -181,7 +181,7 @@
   </div> <!-- END of left-col main half div w/ Events and My-Registration Sections -->
 
   <!-- Wheel menu half div -->
-  <div class='w3-col w3-card l6 m12 w3-padding-32 w3-hide-small w3-margin-bottom' style=' '>
+  <div class='w3-col w3-card l6 m12 w3-padding-32 w3-hide-small w3-margin-bottom'>
     <div id='wheelExt' class='w3-content '>
       <div id="wheel">
         <a class="wheel_part color01 w3-card"></a>

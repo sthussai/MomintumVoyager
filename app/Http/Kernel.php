@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             //custom HTTPS protocol
             \App\Http\Middleware\HttpsProtocol::class,
+            \App\Http\Middleware\UserOnlineStatus::class,
         ],
 
         'api' => [
