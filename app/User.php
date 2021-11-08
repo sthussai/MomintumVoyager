@@ -19,6 +19,8 @@ class User extends \TCG\Voyager\Models\User
      */
     protected $fillable = [
         'name', 'email', 'password',
+        'last_login_at',
+        'last_login_ip',
     ];
 
     /**
@@ -30,6 +32,10 @@ class User extends \TCG\Voyager\Models\User
         'password', 'remember_token',
     ];
 
+    protected $dates = [
+        'last_login_at',
+    ];
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -38,4 +44,12 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $dispatchesEvents = [
+    ];
+
+    public function eventregisters()
+    {
+        return $this->hasMany('App\EventRegister', 'owner_id');
+    }
 }

@@ -9,22 +9,20 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use App\User;  
 
-class UserRegistered
+class EventRegistrationDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    
-    public $user;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(EventRegister $eventregister)
     {
         //
-        $this->user = $user; 
+        $this->eventregister = $eventregister; 
     }
 
     /**
