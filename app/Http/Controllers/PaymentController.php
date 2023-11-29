@@ -143,7 +143,7 @@ class PaymentController extends Controller
             $eventregister->status = 'Paid Online';
             $eventregister->save();
 
-            Notification::send(request()->user(), new PaymentReceived());
+          //  Notification::send(request()->user(), new PaymentReceived());
 
             return redirect('payment')->with('status', 'Paid Event Registration Fee Successfully!');
         } else {
