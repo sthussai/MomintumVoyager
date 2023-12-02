@@ -9,6 +9,7 @@ use Laravel\Cashier\Billable;
 use Cache;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\Traits\CausesActivity;
+use Spatie\Activitylog\LogOptions;
 
 class User extends \TCG\Voyager\Models\User
 {
@@ -62,5 +63,10 @@ class User extends \TCG\Voyager\Models\User
     public function isOnline()
     {
         return Cache::has('user-is-online-' . $this->id);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults();
     }
 }
