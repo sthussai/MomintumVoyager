@@ -8,6 +8,7 @@ use App\Events\EventRegistrationCreated;
 use App\Events\EventRegistrationDeleted;
 use Illuminate\Database\QueryException;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class EventRegister extends Model
 {
@@ -49,6 +50,12 @@ class EventRegister extends Model
             $request->session()->flash('Notice', 'Please Select a Valid Event Status!');
             return back();
         }
+    }
+
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults();
     }
 
 }

@@ -55,7 +55,7 @@
       <div class="row " style='margin:0px'>
         <div class="col w3-display-container" style="padding: 0">
 
-          <img class='w3-image' src="{{url('/storage/'.$program->url)}}" style="width:100%; max-height:500px">
+          <img class='w3-image' src="{{$program->url}}" style="width:100%; max-height:500px">
           <span style='width:100%' class='w3-display-topmiddle w3-padding-large w3-white w3-center w3-opacity'>
             <h1 class='w3-text-black '>{{ $program->title }}</h1>
 

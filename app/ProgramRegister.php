@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\DisplayStatus;
 use Illuminate\Database\QueryException;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class ProgramRegister extends Model
 {
@@ -45,5 +46,11 @@ class ProgramRegister extends Model
             $request->session()->flash('Notice', 'Please Select a Valid Event Status!');
             return back();
         }
+    }
+
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults();
     }
 }

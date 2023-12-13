@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Event;
+use App\Program;
 
 class EventController extends Controller
 {
@@ -67,24 +68,41 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $event = new Event();
 
-        $event->owner_id = auth()->id();
-        $event->type = request()->type;
-        $event->name = request()->name;
-        $event->description = request()->description;
-        $event->url = request()->url;
-        $event->cost = request()->cost;
-        $start_date = request()->start_date;
-        $start_date = date('Y-m-d', strtotime(str_replace('-', '/', $start_date)));
-        $end_date = request()->end_date;
-        $end_date = date('Y-m-d', strtotime(str_replace('-', '/', $end_date)));
+        if ($request->type=='event'){
+            dd('cool');
+            $event = new Event();
 
-        $event->start_date = $start_date;
-        $event->end_date = $end_date;
+            $event->owner_id = auth()->id();
+            $event->type = request()->type;
+            $event->name = request()->name;
+            $event->description = request()->description;
+            $event->url = request()->url;
+            $event->cost = request()->cost;
+            $start_date = request()->start_date;
+            $start_date = date('Y-m-d', strtotime(str_replace('-', '/', $start_date)));
+            $end_date = request()->end_date;
+            $end_date = date('Y-m-d', strtotime(str_replace('-', '/', $end_date)));
+    
+            $event->start_date = $start_date;
+            $event->end_date = $end_date;
+    
+            $event->save(); 
+        } else if ($request->type=='program')
+        {
+            $program = new Program();
 
-        $event->save();
+            $program->name = request()->name;
+            $program->title = request()->name;
+            $program->subheading = request()->description;
+            $program->subheading2 = request()->description;
+            $program->description = request()->description;
+            $program->url = request()->url;
+            $program->description2 = request()->cost;
+    
+            $program->save(); 
+        }
+
 
         return redirect('/events');
     }

@@ -165,6 +165,7 @@ return [
          */
 
         Stevebauman\Location\LocationServiceProvider::class,
+        Spatie\Activitylog\ActivitylogServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -24,7 +24,7 @@
   <form action="/events" method='POST' class="w3-container w3-card-4 w3-light-grey w3-text-blue w3-margin">
     {{ csrf_field() }}
 
-    <h2 class="w3-center"> Create New Event</h2>
+    <h2 class="w3-center"> Create New Event Or Program</h2>
 
     <div class="w3-row w3-section" style='width:320px; '>
 

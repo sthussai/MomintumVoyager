@@ -24,7 +24,7 @@
         @foreach($programs as $listing)
         <a href="/program/{{str_replace(' ', '_', $listing->title)}}">
             <li class="w3-padding-64">
-                <img src="{{url('/storage/'.$listing->url)}}" alt="Image" class="w3-left w3-margin-right"
+                <img src="{{$listing->url}}" alt="Image" class="w3-left w3-margin-right"
                     style="height:100px; max-width:150px;">
                 <span class="w3-large">{{$listing->title}}</span><br>
                 <span>{{$listing->subheading}}</span>
