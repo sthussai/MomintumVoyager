@@ -24,7 +24,7 @@
     <!-- START My Registration Section -->
     <div class=" w3-container w3-white w3-margin-bottom">
       <h2 class="w3-text-grey w3-padding-16"><i
-          class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>My Registrations</h2>
+          class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>My Event Registrations</h2>
 
 
       @forelse ($eventregisters as $eventregister)
@@ -52,6 +52,32 @@
       <h5 class=' w3-panel w3-border w3-round-large  w3-padding'>Not currently registered in any events</h5>
       @endforelse
 
+      <h2 class="w3-text-grey w3-padding-16"><i
+          class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>My Program Registrations</h2>
+
+      @forelse ($programregisters as $programregister)
+      <a href="/programregister/{{$programregister->id}}"
+        class=" w3-row-padding w3-card  w3-block w3-hover-shadow w3-margin-bottom">
+        <div class='w3-col m3 s12 w3-padding-16'>
+          <p class='w3-center'><img src='https://www.w3schools.com/w3images/avatar2.png' class='w3-image'
+              style='max-height: 100px' alt='Avatar'></p>
+        </div>
+        <div class='w3-col m9 s12 w3-padding-16 w3-center'>
+          Name: {{$programregister->name}}<br>
+          User ID: {{$programregister->owner_id}}<br>
+          Email: {{$programregister->email}}<br>
+          Phone: {{$programregister->phone}}<br>
+          Event ID: {{$programregister->event_id}}<br>
+          Reg Status: {{$programregister->status}}<br>
+          Created: {{$programregister->created_at}}<br>
+
+
+        </div>
+      </a>
+
+      @empty
+      <h5 class=' w3-panel w3-border w3-round-large  w3-padding'>Not currently registered in any programs</h5>
+      @endforelse
 
 
     </div>
@@ -59,7 +85,7 @@
     <!-- END My Registration Section -->
 
     <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>
-      Programs and Events </h2>
+      Events </h2>
 
     <div class='w3-row-padding '>
       @foreach ($events as $event)
@@ -95,9 +121,46 @@
       <!-- END of section 1 0f 3 -->
       @endforeach
     </div>
+    {{ $events->links() }}
+    <h2 class="w3-text-grey w3-padding-16"><i class="fa fa-suitcase fa-fw w3-margin-right w3-xxlarge w3-text-teal"></i>
+      Programs</h2>
+    <div class='w3-row-padding '>
+      @foreach ($programs as $program)
+      <!-- Section 1 of 3 -->
+
+      <a href="/programs/{{str_replace(' ', '_',$program->name)}}" class="w3-col w3-center l6 m6 w3-margin-top "
+        >
+        <div class="w3-container w3-card  w3-padding w3-btn w3-block">
+          <h3>{{$program->name}}</h3>
+
+
+          <!-- Start Flex container - 2 divs side by side -->
+          <div style="display:flex; align-items: center;">
+
+            <img class='w3-image' src="{{$program->url}}" style="width:50%;">
+
+
+            <div style='width:50%;  ;'>
+              <h4>5 Terre d</h4>
+              <h4>5 Terre d</h4>
+            </div>
+          </div>
+          <!-- END Flex container - 2 divs side by side -->
+
+
+          <div class="w3-container w3-dark-grey" style='margin-top:5px'>
+            <p>Lorem ipsum dolor sit amet.</p>
+            <p></p>
+          </div>
+        </div>
+      </a>
+
+      <!-- END of section 1 0f 3 -->
+      @endforeach
+    </div>
 
     <!-- Pagination Links -->
-    {{ $events->links() }}
+    {{ $programs->links() }}
 
 
 

@@ -8,6 +8,8 @@ use App\User;
 use App\Flight;
 use App\Event;
 use App\EventRegister;
+use App\Program;
+use App\ProgramRegister;
 use App\ActivityReport;
 use Illuminate\Support\Facades\DB;
 
@@ -43,12 +45,22 @@ class HomeController extends Controller
     public function mprofile()
     {
         $events = Event::paginate(4);
+        $programs = Program::paginate(4);
         $user = Auth::user();
         $eventregisters = EventRegister::where('owner_id', auth()->id())->get();
+        $programregisters = ProgramRegister::where('owner_id', auth()->id())->get();
         $activityreports = ActivityReport::where('owner_id', auth()->id())->get();
         $message = null;
         $cardonfile = null;
-        return view('momintum.mprofile', ['user' => $user, 'cardonfile' => $cardonfile, 'message' => $message, 'events' => $events, 'eventregisters' => $eventregisters, 'activityreports' => $activityreports]);
+        return view('momintum.mprofile', 
+        ['user' => $user,
+         'cardonfile' => $cardonfile,
+          'message' => $message,
+           'events' => $events,
+            'eventregisters' => $eventregisters,
+           'programs' => $programs,
+            'programregisters' => $programregisters,
+             'activityreports' => $activityreports]);
     }
 
     public function test()
