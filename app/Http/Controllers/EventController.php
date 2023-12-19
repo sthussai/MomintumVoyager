@@ -70,7 +70,6 @@ class EventController extends Controller
     {
 
         if ($request->type=='event'){
-            dd('cool');
             $event = new Event();
 
             $event->owner_id = auth()->id();

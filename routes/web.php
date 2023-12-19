@@ -37,6 +37,7 @@ Route::get('/program/{programTitle}', 'PagesController@showprogram');
 /* HomeController */
 Route::get('/mprofile', 'HomeController@mprofile');
 Route::get('/musers', 'HomeController@musers');
+Route::get('/activitylog', 'HomeController@activitylog');
 Route::get('/test', 'HomeController@test');
 Route::get('/locationinfo', 'HomeController@locationinfo');
 Route::get('/home', 'HomeController@index')->name('home');

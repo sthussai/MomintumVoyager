@@ -43,7 +43,7 @@ class ProgramRegister extends Model
         if ($this->validStatus($request)) {
             return true;
         } else {
-            $request->session()->flash('Notice', 'Please Select a Valid Event Status!');
+            $request->session()->flash('Notice', 'Please Select a Valid Program Status!');
             return back();
         }
     }

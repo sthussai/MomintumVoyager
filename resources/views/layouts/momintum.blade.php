@@ -131,8 +131,8 @@
         title="Events"><i class="fa fa-star"></i></a>
       <a href="{{ url('/musers') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
         title="Users"><i class="fa fa-user"></i></a>
-      <a href="{{ url('/test') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
-        title="Admin Mode"><i class="fa fa-adn"></i></a>
+      <a href="{{ url('/activitylog') }}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white"
+        title="Activity log"><i class="fa fa-adn"></i></a>
 
       @guest
 
