@@ -75,3 +75,92 @@
     </div>
 
   </div>
+
+  
+    <!--START Script for AJAX Search Function -->
+    <script>
+      // Open the full screen search box
+      function openSearch() {
+
+        $('#myOverlay').toggle("fast", function() {
+          $('#search').focus();
+        });
+        $(window).scroll(function() {
+          return false;
+        });
+      }
+
+      function closeSearch() {
+        $('#myOverlay').toggle("fast", function() {
+          $('#search').val("");
+          ajaxSearch();
+        });
+      }
+
+      //function to close search After pressing 'ESc'
+
+      $("#myOverlay").keydown(function(event) {
+        if (event.which == 27) { //27 == Key Code for ESc
+          closeSearch();
+        }
+      });
+
+      //function to open search After pressing Keys 'Tab' and 'S'
+      var map = {
+        9: false, //Key code fo Tab
+        83: false //Key code fo s
+      };
+      $(document).keydown(function(e) {
+        if (e.keyCode in map) {
+          map[e.keyCode] = true;
+          if (map[9] && map[83]) {
+            openSearch();
+          }
+        }
+      }).keyup(function(e) {
+        if (e.keyCode in map) {
+          map[e.keyCode] = false;
+        }
+      });
+
+      $('div.overlay:not(.overlay-content)').click(function() {
+        closeSearch();
+      });
+      // stop child click bubbling up to parent
+      $('div.overlay-content').click(function(e) {
+        e.stopPropagation();
+      });
+
+
+
+      // Close the full screen search box
+
+
+      function ajaxSearch() {
+        $value = $("#search").val();
+        console.log($value);
+        $.ajax({
+          type: 'get',
+          url: '/search',
+          data: {
+            'search': $value
+          },
+          success: function(data) {
+            $('#results').html(data);
+          }
+        });
+      }
+
+      $('#search').on('keyup', function() {
+        ajaxSearch();
+      });
+    </script>
+
+    <script type="text/javascript">
+      $.ajaxSetup({
+        headers: {
+          'csrftoken': '{{ csrf_token() }}'
+        }
+      });
+    </script>
+    <!--END Script for AJAX Search Function -->
